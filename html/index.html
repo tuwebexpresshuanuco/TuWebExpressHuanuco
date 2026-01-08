@@ -127,14 +127,26 @@
 
 <!-- ===== COOKIE BANNER ===== -->
 <div id="cookie-banner">
-  <div class="cookie-text">
-    Usamos cookies para mejorar tu experiencia. Puedes aceptar, rechazar o configurar.
-  </div>
+  <p class="cookie-text">
+    Usamos cookies para mejorar tu experiencia.
+  </p>
 
   <div class="cookie-actions">
-    <button class="cookie-btn accept" type="button">Aceptar</button>
-    <button class="cookie-btn reject" type="button">Rechazar</button>
-    <button class="cookie-btn settings" type="button">Configurar</button>
+    <button id="cookie-accept">Aceptar</button>
+    <button id="cookie-reject">Rechazar</button>
+    <button id="cookie-save">Guardar configuración</button>
+  </div>
+
+  <div class="cookie-options">
+    <label>
+      <input type="checkbox" id="cookie-analytics">
+      Cookies de análisis
+    </label>
+
+    <label>
+      <input type="checkbox" id="cookie-marketing">
+      Cookies de marketing
+    </label>
   </div>
 </div>
 
