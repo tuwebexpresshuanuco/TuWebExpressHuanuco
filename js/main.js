@@ -17,31 +17,31 @@ document.addEventListener("DOMContentLoaded", () => {
   const consent = localStorage.getItem("cookieConsent");
   if (!consent) {
     if (isMobile) {
-      cookieText.innerHTML = "Usamos cookies para mejorar tu experiencia:";
+      cookieText.textContent = "Usamos cookies para mejorar tu experiencia:";
     }
-    banner.classList.add("show");
+    banner.style.display = "block";
   }
 
-  // Cargar estado de checkboxes al iniciar
+  // Cargar estado de checkboxes desde localStorage
   if (functionalCheckbox) {
-    const functionalSaved = localStorage.getItem("cookiesFunctional");
-    functionalCheckbox.checked = functionalSaved === "true";
+    const savedFunctional = localStorage.getItem("cookiesFunctional");
+    functionalCheckbox.checked = savedFunctional === "true";
   }
 
   if (analyticsCheckbox) {
-    const analyticsSaved = localStorage.getItem("cookiesAnalytics");
-    analyticsCheckbox.checked = analyticsSaved === "true";
+    const savedAnalytics = localStorage.getItem("cookiesAnalytics");
+    analyticsCheckbox.checked = savedAnalytics === "true";
   }
 
   // Función para guardar cookies
-  const saveCookies = (acceptAll = false, rejectAll = false) => {
-    if (acceptAll) {
+  const saveCookies = (mode = "custom") => {
+    if (mode === "accept") {
       localStorage.setItem("cookieConsent", "accepted");
       if (functionalCheckbox) functionalCheckbox.checked = true;
       if (analyticsCheckbox) analyticsCheckbox.checked = true;
       localStorage.setItem("cookiesFunctional", "true");
       localStorage.setItem("cookiesAnalytics", "true");
-    } else if (rejectAll) {
+    } else if (mode === "reject") {
       localStorage.setItem("cookieConsent", "rejected");
       if (functionalCheckbox) functionalCheckbox.checked = false;
       if (analyticsCheckbox) analyticsCheckbox.checked = false;
@@ -54,13 +54,13 @@ document.addEventListener("DOMContentLoaded", () => {
       if (analyticsCheckbox)
         localStorage.setItem("cookiesAnalytics", analyticsCheckbox.checked);
     }
-    banner.classList.remove("show");
+    banner.style.display = "none";
   };
 
-  // Eventos de botones
-  acceptBtn.addEventListener("click", () => saveCookies(true));
-  rejectBtn.addEventListener("click", () => saveCookies(false));
-  settingsBtn.addEventListener("click", () => {
+  // Botones
+  if (acceptBtn) acceptBtn.addEventListener("click", () => saveCookies("accept"));
+  if (rejectBtn) rejectBtn.addEventListener("click", () => saveCookies("reject"));
+  if (settingsBtn) settingsBtn.addEventListener("click", () => {
     window.location.href = "/html/cookies.html";
   });
 });
