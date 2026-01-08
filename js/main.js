@@ -41,7 +41,19 @@ document.addEventListener("DOMContentLoaded", () => {
     font-weight: 700;
     cursor: pointer;
   `;
+const rejectBtn = document.createElement("button");
+rejectBtn.textContent = "Rechazar";
+rejectBtn.style.cssText = acceptBtn.style.cssText; // mismo estilo
 
+rejectBtn.addEventListener("click", () => {
+  localStorage.setItem("cookieConsent", "rejected");
+  localStorage.setItem("cookiesFunctional", false);
+  localStorage.setItem("cookiesAnalytics", false);
+  if(cookieBanner.parentNode) cookieBanner.parentNode.removeChild(cookieBanner);
+});
+
+cookieBanner.appendChild(rejectBtn);
+  
   const configBtn = document.createElement("a");
   configBtn.textContent = isMobile ? "Configurar" : "Configurar Cookies";
   configBtn.href = "/html/cookies.html";
