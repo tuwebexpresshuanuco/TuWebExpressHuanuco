@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Configuración de Cookies | Tu Web Express Huánuco</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: #000000;
+      color: #FFFFFF;
+    }
+
+    header {
+      text-align: center;
+      padding: 30px 20px;
+      border-bottom: 2px solid #0000FF;
+    }
+
+    header h1 {
+      color: #0000FF;
+      margin: 0;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    h2 {
+      color: #0000FF;
+      margin-bottom: 10px;
+    }
+
+    p {
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    /* ===== COOKIE OPTIONS ===== */
+    .cookie-option {
+      border: 2px solid #0000FF;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 20px;
+      background: #000000;
+    }
+
+    .cookie-option label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .cookie-option input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: #0000FF;
+    }
+
+    .cookie-option small {
+      display: block;
+      margin-top: 8px;
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    /* ===== ACTIONS ===== */
+    .actions {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .button {
+      background: #000000;
+      color: #FFFFFF;
+      border: 2px solid #0000FF;
+      padding: 12px 28px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .button:hover {
+      background: #0000FF;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.85rem;
+      border-top: 1px solid #111;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Configuración de Cookies</h1>
+</header>
+
+<main>
+
+  <p>
+    En Tu Web Express Huánuco utilizamos cookies para garantizar el correcto
+    funcionamiento del sitio y mejorar tu experiencia. Puedes elegir qué tipo
+    de cookies permitir.
+  </p>
+
+  <div class="cookie-option">
+    <label>
+      <input type="checkbox" checked disabled>
+      Cookies necesarias
+    </label>
+    <small>
+      Estas cookies son esenciales para el funcionamiento del sitio y no se pueden desactivar.
+    </small>
+  </div>
+
+  <div class="cookie-option">
+    <label>
+      <input type="checkbox" id="functional">
+      Cookies funcionales
+    </label>
+    <small>
+      Permiten recordar tus preferencias y mejorar la experiencia de uso.
+    </small>
+  </div>
+
+  <div class="cookie-option">
+    <label>
+      <input type="checkbox" id="analytics">
+      Cookies analíticas
+    </label>
+    <small>
+      Nos ayudan a entender cómo se utiliza el sitio para mejorar nuestros servicios.
+    </small>
+  </div>
+
+  <div class="actions">
+    <button class="button" onclick="guardarCookies()">Guardar configuración</button>
+
+    <a
+      href="https://wa.me/51981601075"
+      target="_blank"
+      class="button"
+    >
+      Solicitar mi Web
+    </a>
+  </div>
+
+</main>
+
+<footer>
+  © 2025 Tu Web Express Huánuco. Todos los derechos reservados.
+</footer>
+
+<script>
+  function guardarCookies() {
+    localStorage.setItem("cookieConsent", "custom");
+    localStorage.setItem("cookiesFunctional",
+      document.getElementById("functional").checked);
+    localStorage.setItem("cookiesAnalytics",
+      document.getElementById("analytics").checked);
+
+    alert("Configuración de cookies guardada correctamente.");
+    window.location.href = "index.html";
+  }
+</script>
+
+</body>
+</html>

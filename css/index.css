@@ -1,0 +1,236 @@
+:root {
+  --bg: #000000;
+  --text: #FFFFFF;
+  --accent: #0000FF;
+  --card: #0b0b0d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ================= HEADER ================= */
+
+header {
+  text-align: center;
+  padding: 20px;
+  background: #000000;
+}
+
+header h1 {
+  color: #0000FF;
+  font-size: 2rem;
+  margin: 0 0 10px 0;
+  text-align: center;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.social-links a {
+  color: #0000FF;
+  font-size: 32px;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+  text-align: center;
+  padding: 4rem 1rem;
+}
+
+.btn-primary {
+  display: inline-block;
+  padding: 0.9rem 1.8rem;
+  background: #000000;
+  color: #FFFFFF;
+  border: 2px solid #0000FF;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: #0000FF;
+  color: #FFFFFF;
+}
+
+/* ================= SECTIONS ================= */
+
+section {
+  padding: 3rem 2rem;
+  max-width: 1100px;
+  margin: auto;
+}
+
+section h2 {
+  color: #0000FF;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* ================= PRICING ================= */
+
+.pricing-grid {
+  display: grid;
+  gap: 2.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.plan {
+  background: var(--card);
+  padding: 2rem;
+  border-radius: 12px;
+  border: 2px solid #0000FF;
+  text-align: center;
+}
+
+.plan h3 {
+  color: #0000FF;
+  margin-bottom: 1rem;
+}
+
+.price {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin: 1rem 0;
+}
+
+.plan ul {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0;
+}
+
+.plan ul li {
+  margin-bottom: 0.7rem;
+}
+
+.plan .btn-primary {
+  margin-top: 1rem;
+}
+
+/* ================= FOOTER ================= */
+
+footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  background: #000000;
+}
+
+footer p {
+  margin: 0.5rem 0;
+}
+
+footer .legal-links {
+  text-align: center;
+}
+
+footer .legal-links a {
+  color: #0000FF;
+  text-decoration: none;
+  margin: 0 6px;
+  font-weight: 500;
+}
+
+footer .legal-links a:hover {
+  text-decoration: underline;
+}
+
+
+/* ================= COOKIE BANNER ================= */
+
+#cookie-banner {
+  position: fixed;
+  bottom: -200px;
+  left: 0;
+  width: 100%;
+  background: #000000;
+  color: #FFFFFF;
+  border-top: 2px solid #0000FF;
+  z-index: 99999;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+
+  padding: 15px 30px;
+  transition: bottom 0.5s ease;
+}
+
+#cookie-banner.show {
+  bottom: 0;
+}
+
+.cookie-btn {
+  background: #000000;
+  color: #FFFFFF;
+  border: 2px solid #0000FF;
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.cookie-text {
+  font-size: 0.95rem;
+  max-width: 900px;
+  text-align: center;
+}
+
+.cookie-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.cookie-btn {
+  background: #000000;
+  color: #FFFFFF;
+  border: 2px solid #0000FF;
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.cookie-btn:hover {
+  background: #0000FF;
+  color: #FFFFFF;
+}
+
+
+/* ================= CONTACT ================= */
+
+
+#contact {
+  text-align: center;
+}
+
+#contact a {
+  color: #0000FF;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+#contact a:hover {
+  text-decoration: underline;
+}
