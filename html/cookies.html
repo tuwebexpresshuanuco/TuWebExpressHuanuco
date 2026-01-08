@@ -42,7 +42,6 @@
       margin-bottom: 20px;
     }
 
-    /* ===== COOKIE OPTIONS ===== */
     .cookie-option {
       border: 2px solid #0000FF;
       border-radius: 8px;
@@ -72,7 +71,6 @@
       opacity: 0.9;
     }
 
-    /* ===== ACTIONS ===== */
     .actions {
       margin-top: 40px;
       display: flex;
@@ -149,7 +147,7 @@
   </div>
 
   <div class="actions">
-    <button class="button" onclick="guardarCookies()">Guardar Preferencias</button>
+    <button class="button" id="guardar">Guardar Preferencias</button>
     <a href="/html/index.html" class="button">Volver al Inicio</a>
   </div>
 
@@ -160,27 +158,32 @@
 </footer>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const cookieText = document.getElementById("cookie-text");
+document.addEventListener("DOMContentLoaded", () => {
+  const cookieText = document.getElementById("cookie-text");
 
-    // Detectar móvil o PC
-    const isMobile = /Mobi|Android|iPhone/i.test(navigator.userAgent);
+  // Detectar dispositivo
+  const isMobile = /Mobi|Android|iPhone/i.test(navigator.userAgent);
+  cookieText.textContent = isMobile
+    ? "Usamos cookies para mejorar tu experiencia."
+    : "Usamos cookies para mejorar tu experiencia. Puedes aceptar, rechazar o configurar según tu preferencia.";
 
-    if(isMobile){
-      cookieText.textContent = "Usamos cookies para mejorar tu experiencia.";
-    } else {
-      cookieText.textContent = "Usamos cookies para mejorar tu experiencia. Puedes aceptar, rechazar o configurar según tu preferencia.";
-    }
-  });
+  // Cargar preferencias guardadas
+  const functional = localStorage.getItem("cookiesFunctional");
+  const analytics = localStorage.getItem("cookiesAnalytics");
 
-  function guardarCookies() {
+  if (functional !== null) document.getElementById("functional").checked = functional === "true";
+  if (analytics !== null) document.getElementById("analytics").checked = analytics === "true";
+
+  // Guardar preferencias al hacer clic
+  document.getElementById("guardar").addEventListener("click", () => {
     localStorage.setItem("cookieConsent", "custom");
     localStorage.setItem("cookiesFunctional", document.getElementById("functional").checked);
     localStorage.setItem("cookiesAnalytics", document.getElementById("analytics").checked);
 
     alert("Configuración de cookies guardada correctamente.");
     window.location.href = "/html/index.html";
-  }
+  });
+});
 </script>
 
 </body>
