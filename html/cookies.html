@@ -90,6 +90,7 @@
       font-weight: 700;
       cursor: pointer;
       text-decoration: none;
+      text-align: center;
     }
 
     .button:hover {
@@ -113,10 +114,8 @@
 
 <main>
 
-  <p>
-    En Tu Web Express Huánuco utilizamos cookies para garantizar el correcto
-    funcionamiento del sitio y mejorar tu experiencia. Puedes elegir qué tipo
-    de cookies permitir.
+  <p id="cookie-text">
+    <!-- Texto dinámico según dispositivo -->
   </p>
 
   <div class="cookie-option">
@@ -125,7 +124,7 @@
       Cookies necesarias
     </label>
     <small>
-      Estas cookies son esenciales para el funcionamiento del sitio y no se pueden desactivar.
+      Esenciales para el funcionamiento del sitio y no se pueden desactivar.
     </small>
   </div>
 
@@ -135,7 +134,7 @@
       Cookies funcionales
     </label>
     <small>
-      Permiten recordar tus preferencias y mejorar la experiencia de uso.
+      Recordar tus preferencias y mejorar la experiencia de uso.
     </small>
   </div>
 
@@ -150,33 +149,37 @@
   </div>
 
   <div class="actions">
-    <button class="button" onclick="guardarCookies()">Guardar configuración</button>
-
-    <a
-      href="https://wa.me/51981601075"
-      target="_blank"
-      class="button"
-    >
-      Solicitar mi Web
-    </a>
+    <button class="button" onclick="guardarCookies()">Guardar Preferencias</button>
+    <a href="/html/index.html" class="button">Volver al Inicio</a>
   </div>
 
 </main>
 
 <footer>
-  © 2025 Tu Web Express Huánuco. Todos los derechos reservados.
+  © 2026 Tu Web Express Huánuco. Todos los derechos reservados.
 </footer>
 
 <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const cookieText = document.getElementById("cookie-text");
+
+    // Detectar móvil o PC
+    const isMobile = /Mobi|Android|iPhone/i.test(navigator.userAgent);
+
+    if(isMobile){
+      cookieText.textContent = "Usamos cookies para mejorar tu experiencia.";
+    } else {
+      cookieText.textContent = "Usamos cookies para mejorar tu experiencia. Puedes aceptar, rechazar o configurar según tu preferencia.";
+    }
+  });
+
   function guardarCookies() {
     localStorage.setItem("cookieConsent", "custom");
-    localStorage.setItem("cookiesFunctional",
-      document.getElementById("functional").checked);
-    localStorage.setItem("cookiesAnalytics",
-      document.getElementById("analytics").checked);
+    localStorage.setItem("cookiesFunctional", document.getElementById("functional").checked);
+    localStorage.setItem("cookiesAnalytics", document.getElementById("analytics").checked);
 
     alert("Configuración de cookies guardada correctamente.");
-    window.location.href = "index.html";
+    window.location.href = "/html/index.html";
   }
 </script>
 
