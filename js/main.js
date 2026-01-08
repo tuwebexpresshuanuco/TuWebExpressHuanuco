@@ -24,3 +24,11 @@ document.addEventListener("DOMContentLoaded", () => {
     window.location.href = "html/cookies.html";
   });
 });
+const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+if (isMobile) {
+  banner.style.fontSize = "0.9rem";
+  banner.style.padding = "12px 20px";
+} else {
+  banner.style.fontSize = "0.95rem";
+  banner.style.padding = "15px 30px";
+}
