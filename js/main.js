@@ -1,66 +1,91 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const banner = document.getElementById("cookie-banner");
-  if (!banner) return;
+// ===== MAIN.JS =====
 
-  const acceptBtn = banner.querySelector(".accept");
-  const rejectBtn = banner.querySelector(".reject");
-  const settingsBtn = banner.querySelector(".settings");
-  const cookieText = banner.querySelector(".cookie-text");
+// ELEMENTOS DEL BANNER
+const cookieBanner = document.getElementById("cookie-banner");
+const btnAccept = document.querySelector(".cookie-btn.accept");
+const btnReject = document.querySelector(".cookie-btn.reject");
+const btnSettings = document.querySelector(".cookie-btn.settings");
+
+// FUNCIONES PRINCIPALES
+function mostrarBanner() {
+  const consent = localStorage.getItem("cookieConsent");
+  if (!consent) {
+    cookieBanner.style.display = "flex";
+  } else {
+    cookieBanner.style.display = "none";
+  }
+}
+
+// Guardar elección desde banner (en tiempo real)
+function guardarConsentimiento(tipo) {
+  if (tipo === "accept") {
+    localStorage.setItem("cookieConsent", "all");
+    localStorage.setItem("cookiesFunctional", true);
+    localStorage.setItem("cookiesAnalytics", true);
+  } else if (tipo === "reject") {
+    localStorage.setItem("cookieConsent", "necessary");
+    localStorage.setItem("cookiesFunctional", false);
+    localStorage.setItem("cookiesAnalytics", false);
+  }
+  actualizarBanner();
+}
+
+// Actualizar banner según estado guardado
+function actualizarBanner() {
+  const consent = localStorage.getItem("cookieConsent");
+  if (consent) {
+    cookieBanner.style.display = "none";
+  } else {
+    cookieBanner.style.display = "flex";
+  }
+}
+
+// Sincronizar checkboxes de cookies.html o del banner si los hay
+function sincronizarCheckboxes() {
+  const functional = localStorage.getItem("cookiesFunctional") === "true";
+  const analytics = localStorage.getItem("cookiesAnalytics") === "true";
 
   const functionalCheckbox = document.getElementById("functional");
   const analyticsCheckbox = document.getElementById("analytics");
 
-  // Detectar dispositivo móvil
-  const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+  if (functionalCheckbox) functionalCheckbox.checked = functional;
+  if (analyticsCheckbox) analyticsCheckbox.checked = analytics;
+}
 
-  // Mostrar banner si no hay consentimiento
-  const consent = localStorage.getItem("cookieConsent");
-  if (!consent) {
+// Guardar preferencias desde cookies.html en tiempo real
+function guardarPreferencias() {
+  const functional = document.getElementById("functional")?.checked ?? false;
+  const analytics = document.getElementById("analytics")?.checked ?? false;
+
+  localStorage.setItem("cookieConsent", "custom");
+  localStorage.setItem("cookiesFunctional", functional);
+  localStorage.setItem("cookiesAnalytics", analytics);
+
+  sincronizarCheckboxes();
+  alert("Configuración de cookies guardada correctamente.");
+}
+
+// Texto dinámico según dispositivo
+function textoBannerSegunDispositivo() {
+  const cookieText = document.getElementById("cookie-text");
+  const isMobile = /Mobi|Android|iPhone/i.test(navigator.userAgent);
+
+  if (cookieText) {
     if (isMobile) {
-      cookieText.textContent = "Usamos cookies para mejorar tu experiencia:";
-    }
-    banner.style.display = "block";
-  }
-
-  // Cargar estado de checkboxes desde localStorage
-  if (functionalCheckbox) {
-    const savedFunctional = localStorage.getItem("cookiesFunctional");
-    functionalCheckbox.checked = savedFunctional === "true";
-  }
-
-  if (analyticsCheckbox) {
-    const savedAnalytics = localStorage.getItem("cookiesAnalytics");
-    analyticsCheckbox.checked = savedAnalytics === "true";
-  }
-
-  // Función para guardar cookies
-  const saveCookies = (mode = "custom") => {
-    if (mode === "accept") {
-      localStorage.setItem("cookieConsent", "accepted");
-      if (functionalCheckbox) functionalCheckbox.checked = true;
-      if (analyticsCheckbox) analyticsCheckbox.checked = true;
-      localStorage.setItem("cookiesFunctional", "true");
-      localStorage.setItem("cookiesAnalytics", "true");
-    } else if (mode === "reject") {
-      localStorage.setItem("cookieConsent", "rejected");
-      if (functionalCheckbox) functionalCheckbox.checked = false;
-      if (analyticsCheckbox) analyticsCheckbox.checked = false;
-      localStorage.setItem("cookiesFunctional", "false");
-      localStorage.setItem("cookiesAnalytics", "false");
+      cookieText.textContent = "Usamos cookies para mejorar tu experiencia.";
     } else {
-      localStorage.setItem("cookieConsent", "custom");
-      if (functionalCheckbox)
-        localStorage.setItem("cookiesFunctional", functionalCheckbox.checked);
-      if (analyticsCheckbox)
-        localStorage.setItem("cookiesAnalytics", analyticsCheckbox.checked);
+      cookieText.textContent = "Usamos cookies para mejorar tu experiencia. Puedes aceptar, rechazar o configurar según tu preferencia.";
     }
-    banner.style.display = "none";
-  };
+  }
+}
 
-  // Botones
-  if (acceptBtn) acceptBtn.addEventListener("click", () => saveCookies("accept"));
-  if (rejectBtn) rejectBtn.addEventListener("click", () => saveCookies("reject"));
-  if (settingsBtn) settingsBtn.addEventListener("click", () => {
-    window.location.href = "/html/cookies.html";
-  });
+// ===== EVENTOS =====
+document.addEventListener("DOMContentLoaded", () => {
+  mostrarBanner();
+  textoBannerSegunDispositivo();
+  sincronizarCheckboxes();
 });
+
+if (btnAccept) btnAccept.addEventListener("click", () => guardarConsentimiento("accept"));
+if (btnReject) btnReject.addEventListener("click", () => guardarConsentimiento("reject"));
+if (btnSettings) btnSettings.addEventListener("click", () => window.location.href = "/html/cookies.html");
