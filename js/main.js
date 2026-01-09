@@ -1,63 +1,75 @@
 document.addEventListener("DOMContentLoaded", () => {
   const banner = document.getElementById("cookie-banner");
-  if (!banner) return;
-
-  const text = banner.querySelector(".cookie-text");
-  const btnAccept = document.getElementById("cookie-accept");
-  const btnReject = document.getElementById("cookie-reject");
-  const btnSave = document.getElementById("cookie-save");
-
-  const analytics = document.getElementById("cookie-analytics");
-  const marketing = document.getElementById("cookie-marketing");
-
-  const decision = localStorage.getItem("twe_cookie_decision");
-
-  /* === TEXTO SEGÚN DISPOSITIVO === */
+  const cookieText = document.querySelector("#cookie-banner .cookie-text");
   const isMobile = /Mobi|Android|iPhone/i.test(navigator.userAgent);
-  text.textContent = isMobile
-    ? "Usamos cookies para mejorar tu experiencia."
-    : "Usamos cookies para mejorar tu experiencia. Puedes aceptar, rechazar o configurar.";
 
-  /* === SI YA HAY DECISIÓN, NO MOSTRAR === */
-  if (decision) {
-    banner.style.display = "none";
-    return;
+  if (isMobile) {
+    cookieText.textContent = "Usamos cookies para mejorar tu experiencia.";
+  } else {
+    cookieText.textContent =
+      "Usamos cookies para mejorar tu experiencia. Puedes aceptar, rechazar o configurar según tu preferencia.";
   }
 
-  /* === BOTÓN ACEPTAR === */
-  btnAccept.addEventListener("click", () => {
-    localStorage.setItem("twe_cookie_decision", "accepted");
-    localStorage.setItem("twe_cookie_analytics", "true");
-    localStorage.setItem("twe_cookie_marketing", "true");
-    banner.style.display = "none";
-  });
+  // Recuperar valores de cookies
+  const functional = getCookie("cookiesFunctional") === "true";
+  const analytics = getCookie("cookiesAnalytics") === "true";
+  const consent = getCookie("cookieConsent");
 
-  /* === BOTÓN RECHAZAR === */
-  btnReject.addEventListener("click", () => {
-    localStorage.setItem("twe_cookie_decision", "rejected");
-    localStorage.setItem("twe_cookie_analytics", "false");
-    localStorage.setItem("twe_cookie_marketing", "false");
-    banner.style.display = "none";
-  });
+  // Mostrar estado actual de checkboxes
+  if (consent) {
+    document.getElementById("cookie-analytics").checked = analytics;
+    document.getElementById("cookie-marketing").checked = getCookie("cookiesMarketing") === "true";
+  }
 
-  /* === BOTÓN CONFIGURAR === */
-  btnSave.addEventListener("click", () => {
-    window.location.href = "/html/cookies.html";
-  });
+  // Mostrar el banner solo si no se ha dado consentimiento
+  if (!consent) banner.style.display = "block";
+
+  // Botones
+  document.getElementById("cookie-accept").onclick = () => {
+    setCookie("cookieConsent", "all", 365);
+    setCookie("cookiesFunctional", true, 365);
+    setCookie("cookiesAnalytics", true, 365);
+    setCookie("cookiesMarketing", true, 365);
+    banner.style.display = "none";
+  };
+
+  document.getElementById("cookie-reject").onclick = () => {
+    setCookie("cookieConsent", "none", 365);
+    setCookie("cookiesFunctional", false, 365);
+    setCookie("cookiesAnalytics", false, 365);
+    setCookie("cookiesMarketing", false, 365);
+    banner.style.display = "none";
+  };
+
+  document.getElementById("cookie-save").onclick = () => {
+    const analyticsChecked = document.getElementById("cookie-analytics").checked;
+    const marketingChecked = document.getElementById("cookie-marketing").checked;
+
+    setCookie("cookieConsent", "custom", 365);
+    setCookie("cookiesFunctional", true, 365);
+    setCookie("cookiesAnalytics", analyticsChecked, 365);
+    setCookie("cookiesMarketing", marketingChecked, 365);
+
+    alert("Configuración de cookies guardada correctamente.");
+    banner.style.display = "none";
+  };
 });
 
-/* === CLAVES DEL HTML === */
-
-function guardarCookies() {
-  localStorage.setItem("twe_cookie_decision", "custom");
-  localStorage.setItem(
-    "twe_cookie_analytics",
-    document.getElementById("analytics").checked
-  );
-  localStorage.setItem(
-    "twe_cookie_marketing",
-    document.getElementById("functional").checked
-  );
-
-  window.location.href = "/html/index.html";
+// Funciones para manejar cookies
+function setCookie(name, value, days) {
+  const d = new Date();
+  d.setTime(d.getTime() + days * 24 * 60 * 60 * 1000);
+  const expires = "expires=" + d.toUTCString();
+  document.cookie = name + "=" + value + ";" + expires + ";path=/;SameSite=Lax";
 }
+
+function getCookie(name) {
+  const cname = name + "=";
+  const decoded = decodeURIComponent(document.cookie);
+  const ca = decoded.split(";");
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i].trim();
+    if (c.indexOf(cname) === 0) return c.substring(cname.length, c.length);
+  }
+  return "";
+       }
