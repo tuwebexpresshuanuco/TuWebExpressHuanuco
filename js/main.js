@@ -1,29 +1,32 @@
 document.addEventListener("DOMContentLoaded", () => {
   const banner = document.getElementById("cookie-banner");
-  const cookieConsent = document.cookie.replace(/(?:(?:^|.*;\s*)cookieConsent\s*=\s*([^;]*).*$)|^.*$/, "$1");
 
-  // Mostrar banner solo si no hay cookie
-  if (!cookieConsent) {
+  if (!getCookie("cookieConsent")) {
     banner.style.display = "block";
-  } else {
-    banner.style.display = "none";
   }
 
-  // Botones
-  document.getElementById("cookie-accept").onclick = () => {
-    document.cookie = "cookieConsent=accepted; path=/; max-age=" + 60*60*24*365; // 1 año
+  document.getElementById("cookie-accept").addEventListener("click", () => {
+    setCookie("cookieConsent", "accepted", 365);
     banner.style.display = "none";
-  };
-  document.getElementById("cookie-reject").onclick = () => {
-    document.cookie = "cookieConsent=rejected; path=/; max-age=" + 60*60*24*365; // 1 año
+  });
+
+  document.getElementById("cookie-reject").addEventListener("click", () => {
+    setCookie("cookieConsent", "rejected", 365);
     banner.style.display = "none";
-  };
-  document.getElementById("cookie-save").onclick = () => {
-    const analytics = document.getElementById("cookie-analytics").checked;
-    const marketing = document.getElementById("cookie-marketing").checked;
-    document.cookie = "cookieConsent=custom; path=/; max-age=" + 60*60*24*365;
-    document.cookie = `cookiesAnalytics=${analytics}; path=/; max-age=` + 60*60*24*365;
-    document.cookie = `cookiesMarketing=${marketing}; path=/; max-age=` + 60*60*24*365;
-    banner.style.display = "none";
-  };
+  });
 });
+
+function setCookie(name, value, days) {
+  const date = new Date();
+  date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+  document.cookie = `${name}=${value}; expires=${date.toUTCString()}; path=/`;
+}
+
+function getCookie(name) {
+  const cookies = document.cookie.split("; ");
+  for (let c of cookies) {
+    const [key, value] = c.split("=");
+    if (key === name) return value;
+  }
+  return null;
+}
