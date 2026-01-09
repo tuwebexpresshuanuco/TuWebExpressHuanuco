@@ -175,11 +175,23 @@ footer .legal-links a:hover {
 }
 
 #cookie-banner .cookie-actions {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   gap: 12px;
-  flex-wrap: wrap;
   align-items: center;
 }
+
+#cookie-accept {
+  justify-self: start;
+}
+
+.cookie-config {
+  justify-self: center;
+}
+
+#cookie-reject {
+  justify-self: end;
+  }
 
 #cookie-banner button,
 #cookie-banner .cookie-config {
