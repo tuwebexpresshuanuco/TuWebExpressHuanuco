@@ -30,7 +30,7 @@ header {
 }
 
 header h1 {
-  color: #0000FF;
+  color: #c9a24a;
   font-size: 2rem;
   margin: 0 0 10px 0;
   text-align: center;
@@ -43,7 +43,7 @@ header h1 {
 }
 
 .social-links a {
-  color: #0000FF;
+  color: #c9a24a;
   font-size: 32px;
   display: inline-flex;
   align-items: center;
@@ -61,14 +61,14 @@ header h1 {
   padding: 0.9rem 1.8rem;
   background: #000000;
   color: #FFFFFF;
-  border: 2px solid #0000FF;
+  border: 2px solid #c9a24a;
   border-radius: 8px;
   font-weight: 700;
   cursor: pointer;
 }
 
 .btn-primary:hover {
-  background: #0000FF;
+  background: #c9a24a;
   color: #FFFFFF;
 }
 
@@ -81,7 +81,7 @@ section {
 }
 
 section h2 {
-  color: #0000FF;
+  color: #c9a24a;
   text-align: center;
   margin-bottom: 2rem;
 }
@@ -98,12 +98,12 @@ section h2 {
   background: var(--card);
   padding: 2rem;
   border-radius: 12px;
-  border: 2px solid #0000FF;
+  border: 2px solid #c9a24a;
   text-align: center;
 }
 
 .plan h3 {
-  color: #0000FF;
+  color: #c9a24a;
   margin-bottom: 1rem;
 }
 
@@ -144,7 +144,7 @@ footer .legal-links {
 }
 
 footer .legal-links a {
-  color: #0000FF;
+  color: #c9a24a;
   text-decoration: none;
   margin: 0 6px;
   font-weight: 500;
@@ -165,7 +165,7 @@ footer .legal-links a:hover {
   background: #000000;
   color: #FFFFFF;
   padding: 20px;
-  border-top: 2px solid #0000FF;
+  border-top: 2px solid #c9a24a;
   z-index: 9999;
   font-family: 'Montserrat', sans-serif;
 }
@@ -197,7 +197,7 @@ footer .legal-links a:hover {
 #cookie-banner .cookie-config {
   background: #000000;
   color: #FFFFFF;
-  border: 2px solid #0000FF;
+  border: 2px solid #c9a24a;
   padding: 10px 24px;
   border-radius: 8px;
   font-weight: 600;
@@ -208,7 +208,7 @@ footer .legal-links a:hover {
 
 #cookie-banner button:hover,
 #cookie-banner .cookie-config:hover {
-  background: #0000FF;
+  background: #c9a24a;
 }
 /* ================= CONTACT ================= */
 
@@ -218,7 +218,7 @@ footer .legal-links a:hover {
 }
 
 #contact a {
-  color: #0000FF;
+  color: #c9a24a;
   text-decoration: none;
   font-weight: 500;
 }
