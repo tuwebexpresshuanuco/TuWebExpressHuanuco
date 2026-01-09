@@ -26,7 +26,7 @@ a {
 header {
   text-align: center;
   padding: 20px;
-  background: #000000;
+  background: #0f1724;
 }
 
 header h1 {
@@ -59,7 +59,7 @@ header h1 {
 .btn-primary {
   display: inline-block;
   padding: 0.9rem 1.8rem;
-  background: #000000;
+  background: #0f1724;
   color: #FFFFFF;
   border: 2px solid #c9a24a;
   border-radius: 8px;
@@ -132,7 +132,7 @@ section h2 {
 footer {
   text-align: center;
   padding: 2rem 1rem;
-  background: #000000;
+  background: #0f1724;
 }
 
 footer p {
@@ -162,7 +162,7 @@ footer .legal-links a:hover {
   bottom: 0;
   left: 0;
   right: 0;
-  background: #000000;
+  background: #0f1724;
   color: #FFFFFF;
   padding: 20px;
   border-top: 2px solid #c9a24a;
@@ -195,7 +195,7 @@ footer .legal-links a:hover {
 
 #cookie-banner button,
 #cookie-banner .cookie-config {
-  background: #000000;
+  background:  #0f1724;
   color: #FFFFFF;
   border: 2px solid #c9a24a;
   padding: 10px 24px;
