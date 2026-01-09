@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Configuración de Cookies | Tu Web Express Huánuco</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css" />
 
   <style>
     body {
@@ -30,16 +31,6 @@
       max-width: 900px;
       margin: 0 auto;
       padding: 40px 20px;
-    }
-
-    h2 {
-      color: #0000FF;
-      margin-bottom: 10px;
-    }
-
-    p {
-      line-height: 1.6;
-      margin-bottom: 20px;
     }
 
     .cookie-option {
@@ -103,7 +94,6 @@
     }
   </style>
 </head>
-
 <body>
 
 <header>
@@ -111,7 +101,6 @@
 </header>
 
 <main>
-
   <p id="cookie-text">
     <!-- Texto dinámico según dispositivo -->
   </p>
@@ -121,70 +110,38 @@
       <input type="checkbox" checked disabled>
       Cookies necesarias
     </label>
-    <small>
-      Esenciales para el funcionamiento del sitio y no se pueden desactivar.
-    </small>
+    <small>Esenciales para el funcionamiento del sitio y no se pueden desactivar.</small>
   </div>
 
   <div class="cookie-option">
     <label>
-      <input type="checkbox" id="functional">
-      Cookies funcionales
+      <input type="checkbox" id="cookie-analytics">
+      Cookies de análisis
     </label>
-    <small>
-      Recordar tus preferencias y mejorar la experiencia de uso.
-    </small>
+    <small>Nos ayudan a entender cómo se utiliza el sitio para mejorar nuestros servicios.</small>
   </div>
 
   <div class="cookie-option">
     <label>
-      <input type="checkbox" id="analytics">
-      Cookies analíticas
+      <input type="checkbox" id="cookie-marketing">
+      Cookies de marketing
     </label>
-    <small>
-      Nos ayudan a entender cómo se utiliza el sitio para mejorar nuestros servicios.
-    </small>
+    <small>Se usan para mejorar la experiencia publicitaria y promociones.</small>
   </div>
 
   <div class="actions">
-    <button class="button" id="guardar">Guardar Preferencias</button>
+    <button class="button" id="cookie-accept">Aceptar todas</button>
+    <button class="button" id="cookie-reject">Rechazar todas</button>
+    <button class="button" id="cookie-save">Guardar Preferencias</button>
     <a href="/html/index.html" class="button">Volver al Inicio</a>
   </div>
-
 </main>
 
 <footer>
   © 2026 Tu Web Express Huánuco. Todos los derechos reservados.
 </footer>
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const cookieText = document.getElementById("cookie-text");
-
-  // Detectar dispositivo
-  const isMobile = /Mobi|Android|iPhone/i.test(navigator.userAgent);
-  cookieText.textContent = isMobile
-    ? "Usamos cookies para mejorar tu experiencia."
-    : "Usamos cookies para mejorar tu experiencia. Puedes aceptar, rechazar o configurar según tu preferencia.";
-
-  // Cargar preferencias guardadas
-  const functional = localStorage.getItem("cookiesFunctional");
-  const analytics = localStorage.getItem("cookiesAnalytics");
-
-  if (functional !== null) document.getElementById("functional").checked = functional === "true";
-  if (analytics !== null) document.getElementById("analytics").checked = analytics === "true";
-
-  // Guardar preferencias al hacer clic
-  document.getElementById("guardar").addEventListener("click", () => {
-    localStorage.setItem("cookieConsent", "custom");
-    localStorage.setItem("cookiesFunctional", document.getElementById("functional").checked);
-    localStorage.setItem("cookiesAnalytics", document.getElementById("analytics").checked);
-
-    alert("Configuración de cookies guardada correctamente.");
-    window.location.href = "/html/index.html";
-  });
-});
-</script>
+<script src="/js/main.js" defer></script>
 
 </body>
 </html>
