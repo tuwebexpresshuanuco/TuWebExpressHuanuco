@@ -156,16 +156,18 @@ footer .legal-links a:hover {
 
 
 /* ================= COOKIE BANNER ================= */
-
 #cookie-banner {
+  display: none; /* JS lo cambia a block si no hay cookie */
   position: fixed;
-  bottom: -200px;
+  bottom: 0;
   left: 0;
-  width: 100%;
-  background: #000000;
-  color: #FFFFFF;
+  right: 0;
+  background: #000;
+  color: #fff;
+  padding: 20px;
   border-top: 2px solid #0000FF;
-  z-index: 99999;
+  z-index: 9999;
+}
 
   display: flex;
   justify-content: space-between;
