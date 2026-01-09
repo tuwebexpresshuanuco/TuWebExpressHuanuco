@@ -157,68 +157,63 @@ footer .legal-links a:hover {
 
 /* ================= COOKIE BANNER ================= */
 #cookie-banner {
-  display: none; /* JS lo cambia a block si no hay cookie */
+  display: none; /* JS lo mostrará si no hay cookie */
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  background: #000;
-  color: #fff;
+  background: #000000;
+  color: #FFFFFF;
   padding: 20px;
   border-top: 2px solid #0000FF;
   z-index: 9999;
+  font-family: 'Montserrat', sans-serif;
 }
 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
-
-  padding: 15px 30px;
-  transition: bottom 0.5s ease;
+#cookie-banner p.cookie-text {
+  margin: 0 0 12px 0;
 }
 
-#cookie-banner.show {
-  bottom: 0;
-}
-
-.cookie-btn {
-  background: #000000;
-  color: #FFFFFF;
-  border: 2px solid #0000FF;
-  padding: 10px 22px;
-  border-radius: 8px;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.cookie-text {
-  font-size: 0.95rem;
-  max-width: 900px;
-  text-align: center;
-}
-
-.cookie-actions {
+#cookie-banner .cookie-actions {
   display: flex;
   gap: 12px;
-  justify-content: center;
+  flex-wrap: wrap;
 }
 
-.cookie-btn {
+#cookie-banner .cookie-actions button {
   background: #000000;
   color: #FFFFFF;
   border: 2px solid #0000FF;
-  padding: 10px 22px;
+  padding: 10px 24px;
   border-radius: 8px;
   font-weight: 700;
   cursor: pointer;
+  transition: background 0.2s;
 }
 
-.cookie-btn:hover {
+#cookie-banner .cookie-actions button:hover {
   background: #0000FF;
   color: #FFFFFF;
 }
 
+#cookie-banner .cookie-options {
+  margin-top: 12px;
+  display: flex;
+  gap: 20px;
+}
+
+#cookie-banner .cookie-options label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+}
+
+#cookie-banner .cookie-options input[type="checkbox"] {
+  accent-color: #0000FF;
+  width: 18px;
+  height: 18px;
+}
 
 /* ================= CONTACT ================= */
 
