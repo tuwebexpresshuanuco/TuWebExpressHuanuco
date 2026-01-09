@@ -1,116 +1,113 @@
-/* ================================
-   MAIN.JS – TÚ WEB EXPRESS HUÁNUCO
-   Gestión de Cookies (2026)
-================================ */
+/* ======================================================
+   Tu Web Express Huánuco
+   Cookie Manager – main.js
+   ====================================================== */
 
-// Claves de almacenamiento
-const COOKIE_KEY = "twe_cookie_preferences";
-const COOKIE_ACCEPTED_KEY = "twe_cookie_accepted";
+(function () {
 
-// Detección de dispositivo
-function isMobile() {
-  return /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
-}
+  const COOKIE_KEY = "twe_cookie_accepted";
+  const PREF_KEY   = "twe_cookie_preferences";
 
-// Obtener preferencias guardadas
-function getSavedPreferences() {
-  const data = localStorage.getItem(COOKIE_KEY);
-  return data ? JSON.parse(data) : null;
-}
+  const isIndexPage  = document.getElementById("cookie-banner") !== null;
+  const isCookiesPage =
+    document.getElementById("functional") !== null ||
+    document.getElementById("analytics") !== null;
 
-// Guardar preferencias
-function savePreferences(prefs) {
-  localStorage.setItem(COOKIE_KEY, JSON.stringify(prefs));
-  localStorage.setItem(COOKIE_ACCEPTED_KEY, "true");
-}
-
-// Mostrar banner
-function showCookieBanner() {
-  const banner = document.getElementById("cookie-banner");
-  if (!banner) return;
-
-  const text = banner.querySelector(".cookie-text");
-
-  if (isMobile()) {
-    text.textContent = "Usamos cookies para mejorar tu experiencia.";
+  /* ===============================
+     DETECCIÓN DE DISPOSITIVO
+     =============================== */
+  function isMobileDevice() {
+    return /Mobi|Android|iPhone/i.test(navigator.userAgent);
   }
 
-  banner.style.display = "block";
-}
+  /* ===============================
+     INDEX.HTML → BANNER
+     =============================== */
+  if (isIndexPage) {
+    const banner = document.getElementById("cookie-banner");
 
-// Ocultar banner
-function hideCookieBanner() {
-  const banner = document.getElementById("cookie-banner");
-  if (banner) banner.style.display = "none";
-}
+    if (!banner) return;
 
-// Inicializar checkboxes según estado guardado
-function initCheckboxes() {
-  const prefs = getSavedPreferences();
-  if (!prefs) return;
+    // Texto dinámico
+    const textEl = banner.querySelector(".cookie-text");
+    if (textEl) {
+      textEl.textContent = isMobileDevice()
+        ? "Usamos cookies para mejorar tu experiencia."
+        : "Usamos cookies para mejorar tu experiencia. Puedes aceptar, rechazar o configurar según tu preferencia.";
+    }
 
-  const analytics = document.getElementById("cookie-analytics");
-  const marketing = document.getElementById("cookie-marketing");
+    // Si ya existe decisión → no mostrar
+    if (localStorage.getItem(COOKIE_KEY)) {
+      banner.style.display = "none";
+      return;
+    }
 
-  if (analytics) analytics.checked = !!prefs.analytics;
-  if (marketing) marketing.checked = !!prefs.marketing;
-}
+    banner.style.display = "block";
 
-// Aceptar todas las cookies
-function acceptAllCookies() {
-  const prefs = {
-    necessary: true,
-    analytics: true,
-    marketing: true
-  };
+    const btnAccept = document.getElementById("cookie-accept");
+    const btnReject = document.getElementById("cookie-reject");
+    const btnSave   = document.getElementById("cookie-save");
 
-  savePreferences(prefs);
-  hideCookieBanner();
-}
+    if (btnAccept) {
+      btnAccept.addEventListener("click", () => {
+        localStorage.setItem(COOKIE_KEY, "accepted");
+        localStorage.setItem(PREF_KEY, JSON.stringify({
+          functional: true,
+          analytics: true
+        }));
+        banner.style.display = "none";
+      });
+    }
 
-// Rechazar cookies (solo necesarias)
-function rejectCookies() {
-  const prefs = {
-    necessary: true,
-    analytics: false,
-    marketing: false
-  };
+    if (btnReject) {
+      btnReject.addEventListener("click", () => {
+        localStorage.setItem(COOKIE_KEY, "rejected");
+        localStorage.setItem(PREF_KEY, JSON.stringify({
+          functional: false,
+          analytics: false
+        }));
+        banner.style.display = "none";
+      });
+    }
 
-  savePreferences(prefs);
-  hideCookieBanner();
-}
-
-// Guardar configuración personalizada
-function saveCustomPreferences() {
-  const analytics = document.getElementById("cookie-analytics");
-  const marketing = document.getElementById("cookie-marketing");
-
-  const prefs = {
-    necessary: true,
-    analytics: analytics ? analytics.checked : false,
-    marketing: marketing ? marketing.checked : false
-  };
-
-  savePreferences(prefs);
-  hideCookieBanner();
-}
-
-// Verificar estado al cargar
-document.addEventListener("DOMContentLoaded", () => {
-  const accepted = localStorage.getItem(COOKIE_ACCEPTED_KEY);
-
-  if (!accepted) {
-    showCookieBanner();
-  } else {
-    initCheckboxes();
+    if (btnSave) {
+      btnSave.addEventListener("click", () => {
+        window.location.href = "/html/cookies.html";
+      });
+    }
   }
 
-  // Botones
-  const acceptBtn = document.getElementById("cookie-accept");
-  const rejectBtn = document.getElementById("cookie-reject");
-  const saveBtn = document.getElementById("cookie-save");
+  /* ===============================
+     COOKIES.HTML → CONFIGURACIÓN
+     =============================== */
+  if (isCookiesPage) {
+    const functional = document.getElementById("functional");
+    const analytics  = document.getElementById("analytics");
 
-  if (acceptBtn) acceptBtn.addEventListener("click", acceptAllCookies);
-  if (rejectBtn) rejectBtn.addEventListener("click", rejectCookies);
-  if (saveBtn) saveBtn.addEventListener("click", saveCustomPreferences);
-});
+    // Cargar preferencias previas
+    const storedPrefs = localStorage.getItem(PREF_KEY);
+    if (storedPrefs) {
+      try {
+        const prefs = JSON.parse(storedPrefs);
+        if (functional) functional.checked = !!prefs.functional;
+        if (analytics)  analytics.checked  = !!prefs.analytics;
+      } catch (e) {
+        console.warn("Preferencias corruptas, reiniciando.");
+      }
+    }
+
+    // Exponer función global usada por cookies.html
+    window.guardarCookies = function () {
+      const prefs = {
+        functional: functional ? functional.checked : false,
+        analytics: analytics ? analytics.checked : false
+      };
+
+      localStorage.setItem(COOKIE_KEY, "custom");
+      localStorage.setItem(PREF_KEY, JSON.stringify(prefs));
+
+      window.location.href = "/html/index.html";
+    };
+  }
+
+})();
