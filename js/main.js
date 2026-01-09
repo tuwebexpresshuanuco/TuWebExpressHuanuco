@@ -45,3 +45,19 @@ document.addEventListener("DOMContentLoaded", () => {
     window.location.href = "/html/cookies.html";
   });
 });
+
+/* === CLAVES DEL HTML === */
+
+function guardarCookies() {
+  localStorage.setItem("twe_cookie_decision", "custom");
+  localStorage.setItem(
+    "twe_cookie_analytics",
+    document.getElementById("analytics").checked
+  );
+  localStorage.setItem(
+    "twe_cookie_marketing",
+    document.getElementById("functional").checked
+  );
+
+  window.location.href = "/html/index.html";
+}
