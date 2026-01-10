@@ -1,20 +1,24 @@
 {
-  "name": "TuWebExpress Huánuco",
+  "name": "TuWebExpress Huánuco – Diseño Web Profesional",
   "short_name": "TuWebExpress",
-  "description": "Diseño y desarrollo web profesional en Huánuco.",
-  "start_url": "/",
+  "description": "Diseño y desarrollo web profesional para negocios y emprendedores. Soluciones digitales reales desde Huánuco.",
+  "start_url": "/html/index.html",
+  "scope": "/",
   "display": "standalone",
+  "orientation": "portrait-primary",
   "background_color": "#0f1724",
   "theme_color": "#0f1724",
+  "lang": "es-PE",
+  "categories": ["business", "marketing"],
   "icons": [
     {
-      "src": "/assets/images/favicon/android-chrome-192x192.png",
+      "src": "/assets/images/favicon/favicon-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/assets/images/favicon/android-chrome-512x512.png",
-      "sizes": "512x512",
+      "src": "/assets/images/favicon/favicon-500x500.png",
+      "sizes": "500x500",
       "type": "image/png"
     }
   ]
