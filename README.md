@@ -1,89 +1,109 @@
 # TuWebExpress Huánuco
 
-Bienvenido a **TuWebExpress Huánuco**, tu solución profesional para páginas web elegantes y funcionales.  
-Creamos sitios web personalizados para empresas, emprendedores y servicios de ingeniería, asegurando que tu negocio tenga presencia online destacada y moderna.
+**TuWebExpress Huánuco** es una empresa dedicada al **diseño y desarrollo web profesional**, orientada a negocios, emprendedores y organizaciones que requieren una presencia digital sólida, confiable y alineada a estándares empresariales.
 
-## 🎨 Estilo visual
+Nuestro enfoque combina **imagen corporativa, funcionalidad real y optimización técnica**, garantizando sitios web que no solo se ven bien, sino que cumplen objetivos comerciales concretos.
 
-- **Títulos:** color `#0000FF` (azul profesional)  
-- **Descripciones y texto normal:** color blanco para excelente contraste y legibilidad  
+---
 
-## 🚀 Servicios
+## 🏢 Identidad corporativa
 
-- Diseño web personalizado y responsivo  
-- Integración con redes sociales  
-- Botones de contacto directo  
+- Marca digital con enfoque **profesional y empresarial**
+- Diseño sobrio, moderno y consistente
+- Comunicación clara y orientada a confianza
+- Arquitectura web organizada y escalable
+
+---
+
+## 🎨 Lineamientos visuales
+
+- **Colores corporativos:**  
+  - Negro `#000000` (solidez y autoridad)  
+  - Blanco `#FFFFFF` (claridad y legibilidad)  
+  - Dorado puro `#c9a24a` (tecnología y confianza)
+- **Tipografía:** Montserrat (Google Fonts)
+- **Diseño:** Responsive, limpio y orientado a experiencia de usuario
+
+---
+
+## 🚀 Servicios profesionales
+
+- Diseño web corporativo y empresarial  
+- Landing pages orientadas a conversión  
+- Sitios institucionales y comerciales  
 - Optimización para dispositivos móviles  
-- Soporte profesional y mantenimiento continuo  
-- Implementación de SEO básico  
-- Formularios de contacto interactivos con alertas  
-- Sistema de comentarios con almacenamiento local  
-
-## 💼 Portafolio
-
-Nuestros proyectos destacan por su diseño limpio, minimalista y profesional:
-
-| Proyecto         | Descripción |
-|------------------|-------------|
-| **Sitio Corporativo** | Página elegante para empresas |
-| **Landing Page**      | Orientada a conversión de clientes |
-| **E-commerce**        | Tienda online responsiva |
-| **Blog Profesional**  | Contenido estructurado y optimizado |
-
-## 💬 Sistema de Comentarios
-
-Permite agregar comentarios fácilmente con validación de campos obligatorios, almacenamiento local y alertas visuales atractivas.
-
-## 📁 Estructura de Archivos
-
-| Archivo / Carpeta       | Descripción |
-|-------------------------|-------------|
-| `html/`                 | Contiene todas las páginas HTML del sitio (`index.html`, `privacidad.html`, etc.) |
-| `css/index.css`         | Estilos de diseño elegante y responsivo |
-| `js/`                   | Funcionalidades de comentarios, cookies y tema (archivos JS) |
-| `assets/images/`        | Favicons y demás imágenes necesarias |
-| `README.md`             | Información completa del proyecto |
-| `netlify.toml`          | Configuración de despliegue en Netlify |
-| `_headers`              | Configuración de cabeceras HTTP para Netlify |
-
-## 📞 Contacto
-
-Contáctanos para crear tu página web hoy mismo:
-
-- **Correo:** [tuwebexpresshuanuco2025@gmail.com](mailto:tuwebexpresshuanuco2025@gmail.com)  
-- **Teléfono / WhatsApp:** 981601075  
-- **Facebook:** [TuWebExpress Huánuco](https://www.facebook.com/TuWebExpressHuanuco)  
-- **Instagram:** [TuWebExpress Huánuco](https://www.instagram.com/TuWebExpressHuanuco)  
-- **Sitio web:** [https://tuwebexpresshuanucobusiness2025.netlify.app/](https://tuwebexpresshuanucobusiness2025.netlify.app/)  
+- Integración con WhatsApp y redes sociales  
+- Implementación de SEO técnico básico  
+- Cumplimiento legal (cookies, privacidad, condiciones)  
+- Mantenimiento y soporte técnico
 
 ---
 
-## 💻 Tecnologías utilizadas
+## 💼 Tipos de soluciones desarrolladas
 
-- **HTML5** y **CSS3** con animaciones y efectos modernos  
-- **JavaScript ES6+** para interacción avanzada y almacenamiento local  
-- **Google Fonts** para tipografía profesional  
-- Compatible con todos los navegadores modernos y dispositivos móviles  
-
-## ⚙️ Instrucciones de instalación
-
-1. Clonar o descargar el repositorio  
-2. Abrir `html/index.html` en cualquier navegador moderno  
-3. Asegurarse de que `css/index.css` y `js/` estén correctamente vinculados  
-4. Configurar dominios propios si se desea un enlace personalizado  
-
-## 🔮 Futuras mejoras
-
-- Integración con bases de datos para comentarios persistentes  
-- Panel administrativo para moderación de contenido  
-- SEO avanzado y análisis de tráfico con Google Analytics  
-- Optimización de velocidad y rendimiento con *lazy loading*  
-- Versiones multilingües  
+| Solución | Enfoque |
+|--------|--------|
+| Sitio Corporativo | Imagen institucional y credibilidad |
+| Landing Page | Captación de clientes y ventas |
+| Web Empresarial | Escalabilidad y estructura sólida |
+| Portales informativos | Contenido claro y organizado |
 
 ---
 
-## ❤️ Hecho con pasión por  
-**TuWebExpress Huánuco**  
-_"Llevamos tu marca al siguiente nivel digital con creatividad, tecnología y profesionalismo."_  
+## 🍪 Gestión de cookies y cumplimiento legal
 
-© 2025 TuWebExpress Huánuco — Todos los derechos reservados.
+El sitio incorpora un **sistema propio de consentimiento de cookies**, alineado a buenas prácticas de privacidad:
+
+- Banner de consentimiento configurable  
+- Página dedicada de configuración de cookies  
+- Separación entre cookies necesarias y opcionales  
+- Preparado para futuras ampliaciones (sesiones, autenticación)
+
+---
+
+## 📁 Estructura del proyecto
+
+| Ruta | Descripción |
+|-----|------------|
+| `html/` | Páginas principales del sitio |
+| `css/index.css` | Estilos globales corporativos |
+| `js/main.js` | Lógica de interacción, cookies y UI |
+| `assets/images/favicon/` | Identidad visual y favicons |
+| `_headers` | Cabeceras de seguridad (Netlify) |
+| `_redirects` | Ruteo limpio y profesional |
+| `netlify.toml` | Configuración de despliegue |
+| `README.md` | Documentación corporativa |
+
+---
+
+## 🌐 Despliegue y tecnología
+
+- Sitio estático optimizado
+- Hosting en **Netlify**
+- HTTPS, headers de seguridad y redirects configurados
+- Compatible con navegadores modernos y móviles
+
+---
+
+## 📞 Contacto corporativo
+
+- **Correo:** tuwebexpresshuanuco2025@gmail.com  
+- **WhatsApp / Teléfono:** +51 981 601 075  
+- **Facebook:** https://www.facebook.com/TuWebExpressHuanuco  
+- **Instagram:** https://www.instagram.com/TuWebExpressHuanuco  
+- **Sitio web:** https://tuwebexpressenterprisebusiness.netlify.app/
+
+---
+
+## 📄 Licencia
+
+Este repositorio y su contenido son **propiedad exclusiva de TuWebExpress Huánuco**.
+
+No está permitido copiar, modificar, reutilizar, redistribuir o usar este código —total o parcialmente— sin autorización expresa y por escrito del titular.
+
+**Todos los derechos reservados.**
+
+---
+
+© 2026 TuWebExpress Huánuco  
+Presencia digital profesional, sólida y confiable.
