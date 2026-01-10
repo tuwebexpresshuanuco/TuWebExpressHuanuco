@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tuwebexpressenterprisebusiness.netlify.app/sitemap.xml
