@@ -4,7 +4,7 @@
   "description": "Diseño y desarrollo web profesional en Huánuco.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#000000",
+  "background_color": "#0f1724",
   "theme_color": "#c9a24a",
   "icons": [
     {
