@@ -195,17 +195,17 @@ footer .legal-links a:hover {
 
 #cookie-banner button,
 #cookie-banner .cookie-config {
-  background:  #0f1724;
+  background: #0f1724;
   color: #FFFFFF;
   border: 2px solid #c9a24a;
   padding: 10px 24px;
   border-radius: 8px;
   font-weight: 600;
+  font-size: 0.9rem; /* ↓ reduce solo el texto */
   cursor: pointer;
   text-decoration: none;
   transition: background 0.2s ease;
 }
-
 #cookie-banner button:hover,
 #cookie-banner .cookie-config:hover {
   background: #c9a24a;
