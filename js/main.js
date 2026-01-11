@@ -1,73 +1,66 @@
-/* =========================
-   UTILIDADES DE COOKIES
-========================= */
+/* =====================================================
+   COOKIE CONSENT MANAGER – TuWebExpress Huánuco
+   ===================================================== */
 
-function setCookie(name, value, days) {
-  let expires = "";
-  if (days) {
+(function () {
+  const COOKIE_NAME = "twe_cookie_consent";
+  const COOKIE_DAYS = 180;
+
+  /* ---------- Helpers ---------- */
+  function setCookie(name, value, days) {
     const date = new Date();
-    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-    expires = "; expires=" + date.toUTCString();
+    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+    document.cookie =
+      name +
+      "=" +
+      encodeURIComponent(value) +
+      "; expires=" +
+      date.toUTCString() +
+      "; path=/; SameSite=Lax";
   }
-  document.cookie = name + "=" + value + expires + "; path=/; SameSite=Lax";
-}
 
-function getCookie(name) {
-  const nameEQ = name + "=";
-  const ca = document.cookie.split(";");
-  for (let i = 0; i < ca.length; i++) {
-    let c = ca[i].trim();
-    if (c.indexOf(nameEQ) === 0) {
-      return c.substring(nameEQ.length);
+  function getCookie(name) {
+    const cookies = document.cookie.split("; ");
+    for (let c of cookies) {
+      const [key, val] = c.split("=");
+      if (key === name) return decodeURIComponent(val);
     }
-  }
-  return null;
-}
-
-/* =========================
-   BANNER DE COOKIES
-========================= */
-
-document.addEventListener("DOMContentLoaded", function () {
-  const banner = document.getElementById("cookie-banner");
-  if (!banner) return;
-
-  // 🔑 REGLA CLAVE:
-  // Si NO existe cookie → mostrar banner
-  // Si EXISTE (aceptada, rechazada o configurada) → NO mostrar
-  const consent = getCookie("cookie_consent");
-
-  if (!consent) {
-    banner.style.display = "block";
-  } else {
-    banner.style.display = "none";
+    return null;
   }
 
-  /* ===== BOTONES ===== */
+  /* ---------- Banner Logic ---------- */
+  document.addEventListener("DOMContentLoaded", () => {
+    const banner = document.getElementById("cookie-banner");
+    if (!banner) return;
 
-  const btnAccept = document.getElementById("cookie-accept");
-  const btnReject = document.getElementById("cookie-reject");
-  const btnConfig = document.getElementById("cookie-config");
+    const consent = getCookie(COOKIE_NAME);
 
-  if (btnAccept) {
-    btnAccept.addEventListener("click", function () {
-      setCookie("cookie_consent", "accepted", 365);
-      banner.style.display = "none";
-    });
-  }
+    if (!consent) {
+      banner.style.display = "block";
+    }
 
-  if (btnReject) {
-    btnReject.addEventListener("click", function () {
-      setCookie("cookie_consent", "rejected", 365);
-      banner.style.display = "none";
-    });
-  }
+    const acceptBtn = document.getElementById("cookie-accept");
+    const rejectBtn = document.getElementById("cookie-reject");
+    const configBtn = document.getElementById("cookie-config");
 
-  if (btnConfig) {
-    btnConfig.addEventListener("click", function () {
-      // Guarda estado "custom" SOLO para indicar que ya decidió
-      setCookie("cookie_consent", "custom", 365);
-      window.location.href = "/cookies";
-    });
-  }
-});
+    if (acceptBtn) {
+      acceptBtn.addEventListener("click", () => {
+        setCookie(COOKIE_NAME, "accepted", COOKIE_DAYS);
+        banner.style.display = "none";
+      });
+    }
+
+    if (rejectBtn) {
+      rejectBtn.addEventListener("click", () => {
+        setCookie(COOKIE_NAME, "rejected", COOKIE_DAYS);
+        banner.style.display = "none";
+      });
+    }
+
+    if (configBtn) {
+      configBtn.addEventListener("click", () => {
+        window.location.href = "/cookies";
+      });
+    }
+  });
+})();
