@@ -1,39 +1,42 @@
-/* =====================================================
-   COOKIE CONSENT MANAGER – TuWebExpress Huánuco
-   ===================================================== */
+/* ================================
+   COOKIE UTILITIES
+================================ */
 
-(function () {
-  const COOKIE_NAME = "twe_cookie_consent";
-  const COOKIE_DAYS = 180;
-
-  /* ---------- Helpers ---------- */
-  function setCookie(name, value, days) {
+function setCookie(name, value, days) {
+  let expires = "";
+  if (days) {
     const date = new Date();
     date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-    document.cookie =
-      name +
-      "=" +
-      encodeURIComponent(value) +
-      "; expires=" +
-      date.toUTCString() +
-      "; path=/; SameSite=Lax";
+    expires = "; expires=" + date.toUTCString();
   }
+  document.cookie = name + "=" + encodeURIComponent(value) + expires + "; path=/; SameSite=Lax";
+}
 
-  function getCookie(name) {
-    const cookies = document.cookie.split("; ");
-    for (let c of cookies) {
-      const [key, val] = c.split("=");
-      if (key === name) return decodeURIComponent(val);
+function getCookie(name) {
+  const nameEQ = name + "=";
+  const ca = document.cookie.split(";");
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i].trim();
+    if (c.indexOf(nameEQ) === 0) {
+      return decodeURIComponent(c.substring(nameEQ.length));
     }
-    return null;
   }
+  return null;
+}
 
-  /* ---------- Banner Logic ---------- */
-  document.addEventListener("DOMContentLoaded", () => {
-    const banner = document.getElementById("cookie-banner");
-    if (!banner) return;
+function deleteCookie(name) {
+  document.cookie = name + "=; Max-Age=0; path=/";
+}
 
-    const consent = getCookie(COOKIE_NAME);
+/* ================================
+   COOKIE BANNER (INDEX)
+================================ */
+
+document.addEventListener("DOMContentLoaded", () => {
+  const banner = document.getElementById("cookie-banner");
+
+  if (banner) {
+    const consent = getCookie("twe_cookie_consent");
 
     if (!consent) {
       banner.style.display = "block";
@@ -41,26 +44,75 @@
 
     const acceptBtn = document.getElementById("cookie-accept");
     const rejectBtn = document.getElementById("cookie-reject");
-    const configBtn = document.getElementById("cookie-config");
 
     if (acceptBtn) {
       acceptBtn.addEventListener("click", () => {
-        setCookie(COOKIE_NAME, "accepted", COOKIE_DAYS);
+        setCookie("twe_cookie_consent", "accepted", 180);
+        setCookie("twe_cookie_analytics", "true", 180);
+        setCookie("twe_cookie_marketing", "true", 180);
         banner.style.display = "none";
       });
     }
 
     if (rejectBtn) {
       rejectBtn.addEventListener("click", () => {
-        setCookie(COOKIE_NAME, "rejected", COOKIE_DAYS);
+        setCookie("twe_cookie_consent", "rejected", 180);
+        setCookie("twe_cookie_analytics", "false", 180);
+        setCookie("twe_cookie_marketing", "false", 180);
         banner.style.display = "none";
       });
     }
+  }
 
-    if (configBtn) {
-      configBtn.addEventListener("click", () => {
-        window.location.href = "/cookies";
+  /* ================================
+     COOKIES.HTML LOGIC
+  ================================ */
+
+  const analyticsCheckbox = document.getElementById("cookie-analytics");
+  const marketingCheckbox = document.getElementById("cookie-marketing");
+
+  if (analyticsCheckbox && marketingCheckbox) {
+    analyticsCheckbox.checked = getCookie("twe_cookie_analytics") === "true";
+    marketingCheckbox.checked = getCookie("twe_cookie_marketing") === "true";
+
+    const acceptAllBtn = document.getElementById("cookie-accept-all");
+    const rejectAllBtn = document.getElementById("cookie-reject-all");
+    const saveBtn = document.getElementById("cookie-save");
+
+    if (acceptAllBtn) {
+      acceptAllBtn.addEventListener("click", () => {
+        analyticsCheckbox.checked = true;
+        marketingCheckbox.checked = true;
+
+        setCookie("twe_cookie_consent", "accepted", 180);
+        setCookie("twe_cookie_analytics", "true", 180);
+        setCookie("twe_cookie_marketing", "true", 180);
+
+        alert("Todas las cookies han sido aceptadas.");
       });
     }
-  });
-})();
+
+    if (rejectAllBtn) {
+      rejectAllBtn.addEventListener("click", () => {
+        analyticsCheckbox.checked = false;
+        marketingCheckbox.checked = false;
+
+        setCookie("twe_cookie_consent", "rejected", 180);
+        setCookie("twe_cookie_analytics", "false", 180);
+        setCookie("twe_cookie_marketing", "false", 180);
+
+        alert("Todas las cookies han sido rechazadas.");
+      });
+    }
+
+    if (saveBtn) {
+      saveBtn.addEventListener("click", () => {
+        setCookie("twe_cookie_consent", "custom", 180);
+        setCookie("twe_cookie_analytics", analyticsCheckbox.checked, 180);
+        setCookie("twe_cookie_marketing", marketingCheckbox.checked, 180);
+
+        alert("Preferencias de cookies guardadas correctamente.");
+      });
+    }
+  }
+});
