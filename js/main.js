@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
         message.textContent = "Usamos cookies para mejorar tu experiencia.";
       } else {
         message.textContent =
-          "Usamos cookies para mejorar tu experiencia, puedes aceptar, rechazar o configurar.";
+          "Usamos cookies para mejorar tu experiencia, puedes aceptar, rechazar o configurar según sus preferencias de cookies.";
       }
     }
 
