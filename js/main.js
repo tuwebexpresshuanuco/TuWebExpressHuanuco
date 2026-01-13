@@ -9,7 +9,12 @@ function setCookie(name, value, days) {
     date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
     expires = "; expires=" + date.toUTCString();
   }
-  document.cookie = name + "=" + encodeURIComponent(value) + expires + "; path=/; SameSite=Lax";
+  document.cookie =
+    name +
+    "=" +
+    encodeURIComponent(value) +
+    expires +
+    "; path=/; SameSite=Lax";
 }
 
 function getCookie(name) {
@@ -34,12 +39,34 @@ function deleteCookie(name) {
 
 document.addEventListener("DOMContentLoaded", () => {
   const banner = document.getElementById("cookie-banner");
+  const message = document.querySelector("#cookie-banner .cookie-text");
+  const actions = document.querySelector("#cookie-banner .cookie-actions");
+
+  const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile/i.test(
+    navigator.userAgent
+  );
 
   if (banner) {
     const consent = getCookie("twe_cookie_consent");
 
     if (!consent) {
       banner.style.display = "block";
+    }
+
+    /* ===== Texto dinámico ===== */
+    if (message) {
+      if (isMobile) {
+        message.textContent = "Usamos cookies para mejorar tu experiencia.";
+      } else {
+        message.textContent =
+          "Usamos cookies para mejorar tu experiencia, puedes aceptar, rechazar o configurar.";
+      }
+    }
+
+    /* ===== Ajustes SOLO PC ===== */
+    if (!isMobile && actions) {
+      actions.style.justifyContent = "center";
+      actions.style.gap = "16px";
     }
 
     const acceptBtn = document.getElementById("cookie-accept");
@@ -72,8 +99,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const marketingCheckbox = document.getElementById("cookie-marketing");
 
   if (analyticsCheckbox && marketingCheckbox) {
-    analyticsCheckbox.checked = getCookie("twe_cookie_analytics") === "true";
-    marketingCheckbox.checked = getCookie("twe_cookie_marketing") === "true";
+    analyticsCheckbox.checked =
+      getCookie("twe_cookie_analytics") === "true";
+    marketingCheckbox.checked =
+      getCookie("twe_cookie_marketing") === "true";
 
     const acceptAllBtn = document.getElementById("cookie-accept-all");
     const rejectAllBtn = document.getElementById("cookie-reject-all");
@@ -108,8 +137,16 @@ document.addEventListener("DOMContentLoaded", () => {
     if (saveBtn) {
       saveBtn.addEventListener("click", () => {
         setCookie("twe_cookie_consent", "custom", 180);
-        setCookie("twe_cookie_analytics", analyticsCheckbox.checked, 180);
-        setCookie("twe_cookie_marketing", marketingCheckbox.checked, 180);
+        setCookie(
+          "twe_cookie_analytics",
+          analyticsCheckbox.checked,
+          180
+        );
+        setCookie(
+          "twe_cookie_marketing",
+          marketingCheckbox.checked,
+          180
+        );
 
         alert("Preferencias de cookies guardadas correctamente.");
       });
