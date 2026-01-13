@@ -154,7 +154,6 @@ footer .legal-links a:hover {
   text-decoration: underline;
 }
 
-
 /* ================= COOKIE BANNER ================= */
 #cookie-banner {
   display: none;
@@ -210,6 +209,7 @@ footer .legal-links a:hover {
 #cookie-banner .cookie-config:hover {
   background: #c9a24a;
 }
+
 /* ================= CONTACT ================= */
 
 
@@ -221,6 +221,39 @@ footer .legal-links a:hover {
   color: #c9a24a;
   text-decoration: none;
   font-weight: 500;
+}
+
+/* ================= COOKIE BANNER (PC FIX) ================= */
+@media (min-width: 768px) {
+  #cookie-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  #cookie-banner .cookie-text {
+    max-width: 60%;
+    margin-bottom: 0;
+  }
+
+  #cookie-banner .cookie-actions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    align-items: center;
+  }
+
+  #cookie-accept {
+    justify-self: center;
+  }
+
+  .cookie-config {
+    justify-self: center;
+  }
+
+  #cookie-reject {
+    justify-self: center;
+  }
 }
 
 #contact a:hover {
