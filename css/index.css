@@ -261,7 +261,7 @@ footer .legal-links a:hover {
   text-decoration: underline;
 }
 
-/* ================= COOKIE CHECKBOX CUSTOM ================= */
+/* ================= COOKIE CHECKBOX SERIO ================= */
 
 .cookie-option input[type="checkbox"] {
   -webkit-appearance: none;
@@ -269,7 +269,7 @@ footer .legal-links a:hover {
   width: 20px;
   height: 20px;
   border: 2px solid #c9a24a; /* borde dorado */
-  background: #c9a24a;       /* fondo dorado */
+  background: transparent;    /* fondo transparente cuando no está marcado */
   border-radius: 4px;
   position: relative;
   cursor: pointer;
@@ -288,6 +288,10 @@ footer .legal-links a:hover {
 .cookie-option input[type="checkbox"]:disabled {
   background: #666666; /* gris para cookies necesarias */
   border-color: #666666;
+}
+
+.cookie-option input[type="checkbox"]:disabled::after {
+  color: #FFFFFF;
 }
 
 .cookie-option input[type="checkbox"]:disabled::after {
