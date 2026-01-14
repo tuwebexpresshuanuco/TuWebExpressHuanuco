@@ -261,7 +261,7 @@ footer .legal-links a:hover {
   text-decoration: underline;
 }
 
-/* ================= COOKIE CHECKBOX SERIO ================= */
+/* ================= COOKIE CHECKBOX ACTUALIZADO ================= */
 
 .cookie-option input[type="checkbox"] {
   -webkit-appearance: none;
@@ -273,6 +273,13 @@ footer .legal-links a:hover {
   border-radius: 4px;
   position: relative;
   cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+/* Cuando está marcado */
+.cookie-option input[type="checkbox"]:checked {
+  background: #c9a24a;       /* fondo dorado */
+  border-color: #c9a24a;
 }
 
 .cookie-option input[type="checkbox"]:checked::after {
@@ -285,15 +292,12 @@ footer .legal-links a:hover {
   color: #FFFFFF; /* check blanco */
 }
 
+/* Cookies necesarias (deshabilitado) */
 .cookie-option input[type="checkbox"]:disabled {
-  background: #666666; /* gris para cookies necesarias */
+  background: #666666; /* gris */
   border-color: #666666;
 }
 
 .cookie-option input[type="checkbox"]:disabled::after {
-  color: #FFFFFF;
-}
-
-.cookie-option input[type="checkbox"]:disabled::after {
-  color: #FFFFFF;
+  color: #FFFFFF;      /* check blanco */
 }
