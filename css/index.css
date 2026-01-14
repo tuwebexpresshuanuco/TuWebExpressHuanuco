@@ -261,41 +261,45 @@ footer .legal-links a:hover {
   text-decoration: underline;
 }
 
-/* ================= COOKIE CHECKBOX ACTUALIZADO ================= */
-
+/* ================= CHECKBOX CORPORATIVO ================= */
 .cookie-option input[type="checkbox"] {
-  -webkit-appearance: none;
-  appearance: none;
   width: 20px;
   height: 20px;
-  border: 2px solid #c9a24a; /* borde dorado */
-  background: transparent;    /* fondo transparente cuando no está marcado */
-  border-radius: 4px;
-  position: relative;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   cursor: pointer;
-  transition: background 0.2s ease;
+  border-radius: 3px;
+  border: 2px solid #c9a24a;
+  background-color: transparent;
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  margin: 0;
+  padding: 0;
 }
 
-/* Cuando está marcado */
 .cookie-option input[type="checkbox"]:checked {
-  background: #c9a24a;       /* fondo dorado */
-  border-color: #c9a24a;
+  background-color: #c9a24a;
+  border: 2px solid #c9a24a;
 }
 
 .cookie-option input[type="checkbox"]:checked::after {
-  content: "✓";
+  content: "";
   position: absolute;
-  top: -1px;
-  left: 2px;
-  font-size: 16px;
-  font-weight: bold;
-  color: #FFFFFF; /* check blanco */
+  top: 50%;
+  left: 50%;
+  width: 9px;
+  height: 5px;
+  border-left: 2.2px solid #fff;
+  border-bottom: 2.2px solid #fff;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  box-sizing: border-box;
 }
 
-/* Cookies necesarias (deshabilitado) */
-.cookie-option input[type="checkbox"]:disabled {
-  background: #666666; /* gris */
-  border-color: #666666;
+/* Opcional: hover efecto */
+.cookie-option input[type="checkbox"]:hover {
+  border-color: #c9a24a;
 }
 
 .cookie-option input[type="checkbox"]:disabled::after {
