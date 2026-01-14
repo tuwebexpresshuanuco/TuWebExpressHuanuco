@@ -263,29 +263,33 @@ footer .legal-links a:hover {
 
 /* ================= COOKIE CHECKBOX CUSTOM ================= */
 
-.cookie-options input[type="checkbox"] {
+.cookie-option input[type="checkbox"] {
   -webkit-appearance: none;
   appearance: none;
-  width: 18px;
-  height: 18px;
-  border: 2px solid #c9a24a;
-  background: #c9a24a;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #c9a24a; /* borde dorado */
+  background: #c9a24a;       /* fondo dorado */
   border-radius: 4px;
-  cursor: pointer;
   position: relative;
+  cursor: pointer;
 }
 
-.cookie-options input[type="checkbox"]:checked::after {
+.cookie-option input[type="checkbox"]:checked::after {
   content: "✓";
   position: absolute;
-  top: -2px;
-  left: 3px;
+  top: -1px;
+  left: 2px;
   font-size: 16px;
   font-weight: bold;
-  color: #FFFFFF;
+  color: #FFFFFF; /* check blanco */
 }
 
-.cookie-options input[type="checkbox"]:not(:checked) {
-  background: #666666; /* cookies necesarias (gris) */
+.cookie-option input[type="checkbox"]:disabled {
+  background: #666666; /* gris para cookies necesarias */
   border-color: #666666;
+}
+
+.cookie-option input[type="checkbox"]:disabled::after {
+  color: #FFFFFF;
 }
