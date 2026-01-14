@@ -262,26 +262,51 @@ footer .legal-links a:hover {
 }
 
 /* ================= CHECKBOX CORPORATIVO ================= */
+
+/* Estilo general para todos los checkboxes corporativos */
 .cookie-option input[type="checkbox"] {
   width: 20px;
   height: 20px;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  cursor: pointer;
   border-radius: 3px;
-  border: 2px solid #c9a24a;
-  background-color: transparent;
   display: inline-block;
   vertical-align: middle;
   position: relative;
   margin: 0;
   padding: 0;
+  cursor: pointer;
+}
+
+/* ================= COOKIE NECESARIAS ================= */
+.cookie-option input[type="checkbox"][disabled] {
+  background-color: #B5B5B5;  /* fondo gris */
+  border: 2px solid #B5B5B5;  /* contorno gris */
+  cursor: not-allowed;
+}
+
+.cookie-option input[type="checkbox"][disabled]::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 9px;
+  height: 5px;
+  border-left: 2.2px solid #000000; /* check negro */
+  border-bottom: 2.2px solid #000000;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  box-sizing: border-box;
+}
+
+/* ================= COOKIE OPCIONALES (Análisis y Marketing) ================= */
+.cookie-option input[type="checkbox"]:not([disabled]) {
+  border: 2px solid #c9a24a; /* contorno dorado */
+  background-color: transparent;
 }
 
 .cookie-option input[type="checkbox"]:checked {
-  background-color: #c9a24a;
-  border: 2px solid #c9a24a;
+  background-color: #c9a24a; /* fondo dorado al marcar */
 }
 
 .cookie-option input[type="checkbox"]:checked::after {
@@ -291,17 +316,8 @@ footer .legal-links a:hover {
   left: 50%;
   width: 9px;
   height: 5px;
-  border-left: 2.2px solid #fff;
-  border-bottom: 2.2px solid #fff;
+  border-left: 2.2px solid #FFFFFF; /* check blanco */
+  border-bottom: 2.2px solid #FFFFFF;
   transform: translate(-50%, -50%) rotate(-45deg);
   box-sizing: border-box;
-}
-
-/* Opcional: hover efecto */
-.cookie-option input[type="checkbox"]:hover {
-  border-color: #c9a24a;
-}
-
-.cookie-option input[type="checkbox"]:disabled::after {
-  color: #FFFFFF;      /* check blanco */
 }
