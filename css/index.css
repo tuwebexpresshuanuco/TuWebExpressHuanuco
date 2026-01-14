@@ -223,6 +223,32 @@ footer .legal-links a:hover {
   font-weight: 500;
 }
 
+/* ================= COOKIE CHECKBOXES (CUSTOM) ================= */
+.cookie-option input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #c9a24a;
+  border-radius: 4px;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+}
+
+/* Check blanco */
+.cookie-option input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 5px;
+  width: 4px;
+  height: 8px;
+  border: solid #FFFFFF;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
 /* ================= COOKIE BANNER (PC FIX) ================= */
 @media (min-width: 768px) {
   #cookie-banner {
