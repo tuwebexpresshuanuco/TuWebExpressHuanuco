@@ -297,6 +297,7 @@ footer .legal-links a:hover {
   border-bottom: 2.2px solid #000000;
   transform: translate(-50%, -50%) rotate(-45deg);
   box-sizing: border-box;
+  pointer-events: none; /* asegura que no se pueda interactuar */
 }
 
 /* ================= COOKIE OPCIONALES (Análisis y Marketing) ================= */
@@ -305,11 +306,11 @@ footer .legal-links a:hover {
   background-color: transparent;
 }
 
-.cookie-option input[type="checkbox"]:checked {
+.cookie-option input[type="checkbox"]:not([disabled]):checked {
   background-color: #c9a24a; /* fondo dorado al marcar */
 }
 
-.cookie-option input[type="checkbox"]:checked::after {
+.cookie-option input[type="checkbox"]:not([disabled]):checked::after {
   content: "";
   position: absolute;
   top: 50%;
