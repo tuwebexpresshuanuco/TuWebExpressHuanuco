@@ -88,7 +88,7 @@ El sitio incorpora un **sistema propio de consentimiento de cookies**, alineado 
 ## 📞 Contacto corporativo
 
 - **Correo:** tuwebexpress.hco@gmail.com  
-- **WhatsApp / Teléfono:** 981 601 075  
+- **WhatsApp / Teléfono:** +51 981 601 075  
 - **Facebook:** https://www.facebook.com/TuWebExpressHuanuco  
 - **Instagram:** https://www.instagram.com/TuWebExpressHuanuco  
 - **Sitio web:** https://tuwebexpresshuanuco2026enterprise.netlify.app/
