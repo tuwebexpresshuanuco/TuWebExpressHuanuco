@@ -368,6 +368,7 @@ footer .legal-links a:hover {
   min-height: 1.2rem;
 }
 
+{
   border-bottom: 2.2px solid #FFFFFF;
   transform: translate(-50%, -50%) rotate(-45deg);
   box-sizing: border-box;
