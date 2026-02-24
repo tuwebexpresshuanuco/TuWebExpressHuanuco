@@ -317,6 +317,56 @@ footer .legal-links a:hover {
   width: 9px;
   height: 5px;
   border-left: 2.2px solid #FFFFFF; /* check blanco */
+
+  /* ================= SECURE CONTACT (EZEE) ================= */
+#secure-contact {
+  background: var(--bg);
+  border: 2px solid #c9a24a;
+  border-radius: 12px;
+  padding: 2rem;
+}
+
+.secure-contact-intro {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 1.5rem auto;
+}
+
+.secure-contact-form {
+  display: grid;
+  gap: 0.75rem;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.secure-contact-form label {
+  font-weight: 600;
+  color: #c9a24a;
+}
+
+.secure-contact-form input,
+.secure-contact-form textarea {
+  width: 100%;
+  background: var(--bg);
+  color: #FFFFFF;
+  border: 1px solid #c9a24a;
+  border-radius: 8px;
+  padding: 0.75rem;
+  font: inherit;
+}
+
+.secure-contact-form textarea {
+  resize: vertical;
+}
+
+.secure-contact-status {
+  max-width: 760px;
+  margin: 1rem auto 0 auto;
+  text-align: center;
+  color: #c9a24a;
+  min-height: 1.2rem;
+}
+
   border-bottom: 2.2px solid #FFFFFF;
   transform: translate(-50%, -50%) rotate(-45deg);
   box-sizing: border-box;
