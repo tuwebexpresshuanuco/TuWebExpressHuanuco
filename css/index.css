@@ -39,25 +39,40 @@ header h1 {
 .social-links {
   display: flex;
   justify-content: center;
-  gap: 16px;
+  gap: 18px;
+  margin-top: 20px;
 }
 
+/* Caja uniforme */
 .social-links a {
-  display: inline-flex;
+  width: 48px;
+  height: 48px;
+  border: 1px solid #c9a24a;
+  border-radius: 12px;
+  display: flex;
   align-items: center;
-  color: #c9a24a;
-  transition: all 0.2s ease;
+  justify-content: center;
+  background: #0f1724;
+  transition: all .25s ease;
 }
 
+/* Iconos */
 .icon {
-  width: 32px;
-  height: 32px;
-  fill: currentColor;
+  width: 24px;
+  height: 24px;
+  color: #c9a24a;
+  transition: all .25s ease;
 }
 
+/* Hover premium */
 .social-links a:hover {
-  color: #ffffff;
-  transform: translateY(-2px);
+  background: #c9a24a;
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(201,162,74,0.25);
+}
+
+.social-links a:hover .icon {
+  color: #0f1724;
 }
 /* ================= HERO ================= */
 
