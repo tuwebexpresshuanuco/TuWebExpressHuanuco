@@ -46,24 +46,19 @@ header h1 {
   display: inline-flex;
   align-items: center;
   color: #c9a24a;
-}
-
-.social-links img {
-  width: 32px;
-  height: 32px;
+  transition: all 0.2s ease;
 }
 
 .icon {
   width: 32px;
   height: 32px;
-  color: #c9a24a;
+  fill: currentColor;
 }
 
-.social-links a:hover .icon {
+.social-links a:hover {
   color: #ffffff;
   transform: translateY(-2px);
 }
-
 /* ================= HERO ================= */
 
 .hero {
