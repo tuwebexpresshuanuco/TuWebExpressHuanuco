@@ -153,3 +153,108 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 });
+
+/* ================================
+   SECURE CONTACT (EZEE)
+================================ */
+
+async function encryptMessageWithPassphrase(plainText, passphrase) {
+  const enc = new TextEncoder();
+  const salt = crypto.getRandomValues(new Uint8Array(16));
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+
+  const keyMaterial = await crypto.subtle.importKey(
+    "raw",
+    enc.encode(passphrase),
+    { name: "PBKDF2" },
+    false,
+    ["deriveKey"]
+  );
+
+  const key = await crypto.subtle.deriveKey(
+    {
+      name: "PBKDF2",
+      salt,
+      iterations: 120000,
+      hash: "SHA-256"
+    },
+    keyMaterial,
+    { name: "AES-GCM", length: 256 },
+    false,
+    ["encrypt"]
+  );
+
+  const cipherBuffer = await crypto.subtle.encrypt(
+    { name: "AES-GCM", iv },
+    key,
+    enc.encode(plainText)
+  );
+
+  const toB64 = (bytes) => btoa(String.fromCharCode(...new Uint8Array(bytes)));
+
+  return {
+    algorithm: "AES-GCM",
+    kdf: "PBKDF2-SHA256",
+    iterations: 120000,
+    salt: toB64(salt),
+    iv: toB64(iv),
+    ciphertext: toB64(cipherBuffer)
+  };
+}
+
+const secureForm = document.getElementById("secure-contact-form");
+const secureStatus = document.getElementById("secure-contact-status");
+
+if (secureForm && secureStatus) {
+  secureForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const name = document.getElementById("secure-name")?.value?.trim();
+    const contact = document.getElementById("secure-email")?.value?.trim();
+    const message = document.getElementById("secure-message")?.value?.trim();
+    const passphrase = document.getElementById("secure-passphrase")?.value || "";
+
+    if (!name || !contact || !message || passphrase.length < 8) {
+      secureStatus.textContent = "Completa todos los campos y usa una clave de al menos 8 caracteres.";
+      return;
+    }
+
+    try {
+      const payload = {
+        createdAt: new Date().toISOString(),
+        name,
+        contact,
+        message
+      };
+
+      const encrypted = await encryptMessageWithPassphrase(
+        JSON.stringify(payload),
+        passphrase
+      );
+
+      const encryptedText = [
+        "[EZEE ENCRYPTED MESSAGE]",
+        `timestamp: ${payload.createdAt}`,
+        `algorithm: ${encrypted.algorithm}`,
+        `kdf: ${encrypted.kdf}`,
+        `iterations: ${encrypted.iterations}`,
+        `salt: ${encrypted.salt}`,
+        `iv: ${encrypted.iv}`,
+        `ciphertext: ${encrypted.ciphertext}`
+      ].join("\n");
+
+      const subject = encodeURIComponent("Consulta cifrada desde TuWebExpress Huánuco");
+      const body = encodeURIComponent(encryptedText);
+      const to = "tuwebexpress.hco@gmail.com";
+
+      const mailtoUrl = `mailto:${to}?subject=${subject}&body=${body}`;
+      window.location.href = mailtoUrl;
+
+      secureStatus.textContent = "Mensaje cifrado generado. Se abrió tu app de correo para enviarlo a tuwebexpress.hco@gmail.com.";
+      secureForm.reset();
+    } catch (error) {
+      secureStatus.textContent = "No se pudo cifrar el mensaje en este navegador.";
+    }
+  });
+}
+
