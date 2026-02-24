@@ -322,7 +322,7 @@ footer .legal-links a:hover {
   /* ================= SECURE CONTACT (EZEE) ================= */
 #secure-contact {
   background: var(--bg);
-  border: 2px solid #c9a24a;
+  border: 2px solid #FFFFFF;
   border-radius: 12px;
   padding: 2rem;
 }
@@ -342,7 +342,7 @@ footer .legal-links a:hover {
 
 .secure-contact-form label {
   font-weight: 600;
-  color: #c9a24a;
+  color: #FFFFFF;
 }
 
 .secure-contact-form input,
@@ -350,7 +350,7 @@ footer .legal-links a:hover {
   width: 100%;
   background: var(--bg);
   color: #FFFFFF;
-  border: 1px solid #c9a24a;
+  border: 1px solid #FFFFFF;
   border-radius: 8px;
   padding: 0.75rem;
   font: inherit;
@@ -364,7 +364,7 @@ footer .legal-links a:hover {
   max-width: 760px;
   margin: 1rem auto 0 auto;
   text-align: center;
-  color: #c9a24a;
+  color: #FFFFFF;
   min-height: 1.2rem;
 }
 
