@@ -43,10 +43,14 @@ header h1 {
 }
 
 .social-links a {
-  color: #c9a24a;
-  font-size: 32px;
   display: inline-flex;
   align-items: center;
+  color: #c9a24a;
+}
+
+.social-links img {
+  width: 32px;
+  height: 32px;
 }
 
 /* ================= HERO ================= */
