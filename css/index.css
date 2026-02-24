@@ -322,7 +322,7 @@ footer .legal-links a:hover {
   /* ================= SECURE CONTACT (EZEE) ================= */
 #secure-contact {
   background: var(--bg);
-  border: 2px solid #FFFFFF;
+  border: 2px solid #c9a24a;
   border-radius: 12px;
   padding: 2rem;
 }
@@ -350,7 +350,7 @@ footer .legal-links a:hover {
   width: 100%;
   background: var(--bg);
   color: #FFFFFF;
-  border: 1px solid #FFFFFF;
+  border: 1px solid #c9a24a;
   border-radius: 8px;
   padding: 0.75rem;
   font: inherit;
