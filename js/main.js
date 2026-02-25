@@ -153,108 +153,210 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 });
+"use strict";
 
-/* ================================
-   SECURE CONTACT (EZEE)
-================================ */
+/* =========================================================
+   👑 EZEE SUPREMO — END-TO-END ENCRYPTION SYSTEM
+   ========================================================= */
 
-async function encryptMessageWithPassphrase(plainText, passphrase) {
+const EZEE = (() => {
+
   const enc = new TextEncoder();
-  const salt = crypto.getRandomValues(new Uint8Array(16));
-  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const dec = new TextDecoder();
 
-  const keyMaterial = await crypto.subtle.importKey(
-    "raw",
-    enc.encode(passphrase),
-    { name: "PBKDF2" },
-    false,
-    ["deriveKey"]
-  );
+  /* ===== Utilidades ===== */
 
-  const key = await crypto.subtle.deriveKey(
-    {
-      name: "PBKDF2",
-      salt,
-      iterations: 120000,
-      hash: "SHA-256"
-    },
-    keyMaterial,
-    { name: "AES-GCM", length: 256 },
-    false,
-    ["encrypt"]
-  );
+  const b64 = bytes =>
+    btoa(String.fromCharCode(...new Uint8Array(bytes)));
 
-  const cipherBuffer = await crypto.subtle.encrypt(
-    { name: "AES-GCM", iv },
-    key,
-    enc.encode(plainText)
-  );
+  const unb64 = str =>
+    new Uint8Array(atob(str).split("").map(c => c.charCodeAt(0)));
 
-  const toB64 = (bytes) => btoa(String.fromCharCode(...new Uint8Array(bytes)));
+  /* ===== Derivación de clave segura ===== */
 
-  return {
-    algorithm: "AES-GCM",
-    kdf: "PBKDF2-SHA256",
-    iterations: 120000,
-    salt: toB64(salt),
-    iv: toB64(iv),
-    ciphertext: toB64(cipherBuffer)
-  };
+  async function deriveKey(password, salt) {
+
+    const keyMaterial = await crypto.subtle.importKey(
+      "raw",
+      enc.encode(password),
+      "PBKDF2",
+      false,
+      ["deriveKey"]
+    );
+
+    return crypto.subtle.deriveKey(
+      {
+        name: "PBKDF2",
+        salt,
+        iterations: 210000,
+        hash: "SHA-256"
+      },
+      keyMaterial,
+      { name: "AES-GCM", length: 256 },
+      false,
+      ["encrypt", "decrypt"]
+    );
+  }
+
+  /* ===== CIFRAR ===== */
+
+  async function encrypt(plainText, password) {
+
+    const salt = crypto.getRandomValues(new Uint8Array(16));
+    const iv   = crypto.getRandomValues(new Uint8Array(12));
+
+    const key = await deriveKey(password, salt);
+
+    const cipher = await crypto.subtle.encrypt(
+      { name: "AES-GCM", iv },
+      key,
+      enc.encode(plainText)
+    );
+
+    return JSON.stringify({
+      v: 1,
+      s: b64(salt),
+      i: b64(iv),
+      d: b64(cipher)
+    });
+  }
+
+  /* ===== DESCIFRAR ===== */
+
+  async function decrypt(payload, password) {
+
+    const data = JSON.parse(payload);
+
+    const salt = unb64(data.s);
+    const iv   = unb64(data.i);
+    const buf  = unb64(data.d);
+
+    const key = await deriveKey(password, salt);
+
+    const plain = await crypto.subtle.decrypt(
+      { name: "AES-GCM", iv },
+      key,
+      buf
+    );
+
+    return dec.decode(plain);
+  }
+
+  return { encrypt, decrypt };
+
+})();
+
+
+/* =========================================================
+   🚀 ENVÍO SEGURO SUPREMO
+   ========================================================= */
+
+async function EZEE_enviar() {
+
+  const mensaje = document.getElementById("mensaje")?.value.trim();
+  const clave   = document.getElementById("clave")?.value;
+
+  if (!mensaje || !clave || clave.length < 8) {
+    alert("⚠️ Escribe mensaje y clave (mínimo 8 caracteres)");
+    return;
+  }
+
+  try {
+
+    /* ===== Crear paquete cifrado ===== */
+
+    const paquete = JSON.stringify({
+      t: Date.now(),
+      m: mensaje
+    });
+
+    const cifrado = await EZEE.encrypt(paquete, clave);
+
+    /* ===== Enviar ===== */
+
+    await fetch("/api/secure-contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ payload: cifrado })
+    });
+
+    /* ===== Autodestrucción local ===== */
+
+    document.getElementById("mensaje").value = "";
+    document.getElementById("clave").value   = "";
+
+    alert("✅ Mensaje enviado con cifrado SUPREMO");
+
+  } catch (e) {
+    console.error(e);
+    alert("❌ Error de cifrado o envío");
+  }
 }
 
-const secureForm = document.getElementById("secure-contact-form");
-const secureStatus = document.getElementById("secure-contact-status");
 
-if (secureForm && secureStatus) {
-  secureForm.addEventListener("submit", async (event) => {
-    event.preventDefault();
+/* =========================================================
+   🔓 LECTOR PRIVADO (solo quien tenga la clave)
+   ========================================================= */
 
-    const name = document.getElementById("secure-name")?.value?.trim();
-    const contact = document.getElementById("secure-email")?.value?.trim();
-    const message = document.getElementById("secure-message")?.value?.trim();
-    const passphrase = document.getElementById("secure-passphrase")?.value || "";
+async function EZEE_leer(payload) {
 
-    if (!name || !contact || !message || passphrase.length < 8) {
-      secureStatus.textContent = "Completa todos los campos y usa una clave de al menos 8 caracteres.";
-      return;
-    }
+  const clave = prompt("🔑 Introduce la clave compartida");
 
-    try {
-      const payload = {
-        createdAt: new Date().toISOString(),
-        name,
-        contact,
-        message
-      };
+  if (!clave) return;
 
-      const encrypted = await encryptMessageWithPassphrase(
-        JSON.stringify(payload),
-        passphrase
-      );
+  try {
 
-      const encryptedText = [
-        "[EZEE ENCRYPTED MESSAGE]",
-        `timestamp: ${payload.createdAt}`,
-        `algorithm: ${encrypted.algorithm}`,
-        `kdf: ${encrypted.kdf}`,
-        `iterations: ${encrypted.iterations}`,
-        `salt: ${encrypted.salt}`,
-        `iv: ${encrypted.iv}`,
-        `ciphertext: ${encrypted.ciphertext}`
-      ].join("\n");
+    const texto = await EZEE.decrypt(payload, clave);
+    const datos = JSON.parse(texto);
 
-      const subject = encodeURIComponent("Consulta cifrada desde TuWebExpress Huánuco");
-      const body = encodeURIComponent(encryptedText);
-      const to = "tuwebexpress.hco@gmail.com";
+    alert(
+      "📩 Mensaje seguro\n\n" +
+      datos.m +
+      "\n\n🕒 " +
+      new Date(datos.t).toLocaleString()
+    );
 
-      const mailtoUrl = `mailto:${to}?subject=${subject}&body=${body}`;
-      window.location.href = mailtoUrl;
-
-      secureStatus.textContent = "Mensaje cifrado generado. Se abrió tu app de correo para enviarlo a tuwebexpress.hco@gmail.com.";
-      secureForm.reset();
-    } catch (error) {
-      secureStatus.textContent = "No se pudo cifrar el mensaje en este navegador.";
-    }
-  });
+  } catch {
+    alert("❌ Clave incorrecta o mensaje alterado");
+  }
 }
 
+
+/* =========================================================
+   ⚡ ATAJOS PRO
+   ========================================================= */
+
+document.addEventListener("keydown", e => {
+
+  if (e.ctrlKey && e.key === "Enter") {
+    EZEE_enviar();
+  }
+
+});
+
+
+/* =========================================================
+   🛡️ PROTECCIONES BÁSICAS CLIENTE
+   ========================================================= */
+
+/* Evitar copiar accidentalmente texto sensible */
+
+document.addEventListener("copy", e => {
+  const activo = document.activeElement;
+  if (activo?.id === "mensaje" || activo?.id === "clave") {
+    e.preventDefault();
+    alert("🔐 Copia deshabilitada en modo seguro");
+  }
+});
+
+
+/* Borrar datos si se cambia de pestaña */
+
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) {
+    const m = document.getElementById("mensaje");
+    const c = document.getElementById("clave");
+    if (m) m.value = "";
+    if (c) c.value = "";
+  }
+});
