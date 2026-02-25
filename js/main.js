@@ -253,8 +253,8 @@ const EZEE = (() => {
 
 async function EZEE_enviar() {
 
-  const mensaje = document.getElementById("mensaje")?.value.trim();
-  const clave   = document.getElementById("clave")?.value;
+const mensaje = document.getElementById("secure-message")?.value.trim();
+const clave   = document.getElementById("secure-passphrase")?.value;
 
   if (!mensaje || !clave || clave.length < 8) {
     alert("⚠️ Escribe mensaje y clave (mínimo 8 caracteres)");
@@ -282,8 +282,8 @@ async function EZEE_enviar() {
 
     /* ===== Autodestrucción local ===== */
 
-    document.getElementById("mensaje").value = "";
-    document.getElementById("clave").value   = "";
+   document.getElementById("secure-message").value = "";
+document.getElementById("secure-passphrase").value = "";
 
     alert("✅ Mensaje enviado con cifrado SUPREMO");
 
@@ -343,7 +343,7 @@ document.addEventListener("keydown", e => {
 
 document.addEventListener("copy", e => {
   const activo = document.activeElement;
-  if (activo?.id === "mensaje" || activo?.id === "clave") {
+ if (activo?.id === "secure-message" || activo?.id === "secure-passphrase")
     e.preventDefault();
     alert("🔐 Copia deshabilitada en modo seguro");
   }
