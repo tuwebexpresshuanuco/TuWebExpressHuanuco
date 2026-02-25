@@ -3,6 +3,8 @@
   --text: #FFFFFF;
   --accent: #c9a24a;
   --card: #0b0b0d;
+  --gray: #b5b5b5
+  --black: #000000
 }
 
 * {
@@ -26,11 +28,11 @@ a {
 header {
   text-align: center;
   padding: 20px;
-  background: #0f1724;
+  background: var(--bg);
 }
 
 header h1 {
-  color: #c9a24a;
+  color: var(--accent);
   font-size: 2rem;
   margin: 0 0 10px 0;
   text-align: center;
@@ -47,12 +49,12 @@ header h1 {
 .social-links a {
   width: 48px;
   height: 48px;
-  border: 1px solid #c9a24a;
+  border: 1px solid var(--accent);
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #0f1724;
+  background: var(--bg);
   transition: all .25s ease;
 }
 
@@ -60,19 +62,19 @@ header h1 {
 .icon {
   width: 24px;
   height: 24px;
-  color: #c9a24a;
+  color: var(--accent);
   transition: all .25s ease;
 }
 
 /* Hover premium */
 .social-links a:hover {
-  background: #c9a24a;
+  background: var(--accent);
   transform: translateY(-4px);
   box-shadow: 0 8px 20px rgba(201,162,74,0.25);
 }
 
 .social-links a:hover .icon {
-  color: #0f1724;
+  color: var(--bg);
 }
 /* ================= HERO ================= */
 
@@ -84,17 +86,17 @@ header h1 {
 .btn-primary {
   display: inline-block;
   padding: 0.9rem 1.8rem;
-  background: #0f1724;
-  color: #FFFFFF;
-  border: 2px solid #c9a24a;
+  background: var(--bg);
+  color: var(--text);
+  border: 2px solid var(--accent);
   border-radius: 8px;
   font-weight: 700;
   cursor: pointer;
 }
 
 .btn-primary:hover {
-  background: #c9a24a;
-  color: #FFFFFF;
+  background: var(--accent);
+  color: var(--text);
 }
 
 /* ================= SECTIONS ================= */
@@ -106,7 +108,7 @@ section {
 }
 
 section h2 {
-  color: #c9a24a;
+  color: var(--accent);
   text-align: center;
   margin-bottom: 2rem;
 }
@@ -123,12 +125,12 @@ section h2 {
   background: var(--card);
   padding: 2rem;
   border-radius: 12px;
-  border: 2px solid #c9a24a;
+  border: 2px solid var(--accent);
   text-align: center;
 }
 
 .plan h3 {
-  color: #c9a24a;
+  color: var(--accent);
   margin-bottom: 1rem;
 }
 
@@ -157,7 +159,7 @@ section h2 {
 footer {
   text-align: center;
   padding: 2rem 1rem;
-  background: #0f1724;
+  background: var(--bg);
 }
 
 footer p {
@@ -169,7 +171,7 @@ footer .legal-links {
 }
 
 footer .legal-links a {
-  color: #c9a24a;
+  color: var(--accent);
   text-decoration: none;
   margin: 0 6px;
   font-weight: 500;
@@ -186,10 +188,10 @@ footer .legal-links a:hover {
   bottom: 0;
   left: 0;
   right: 0;
-  background: #0f1724;
-  color: #FFFFFF;
+  background: var(--bg);
+  color: var(--text);
   padding: 20px;
-  border-top: 2px solid #c9a24a;
+  border-top: 2px solid var(--accent);
   z-index: 9999;
 }
 
@@ -218,9 +220,9 @@ footer .legal-links a:hover {
 
 #cookie-banner button,
 #cookie-banner .cookie-config {
-  background: #0f1724;
-  color: #FFFFFF;
-  border: 2px solid #c9a24a;
+  background: var(--bg);
+  color: var(--text);
+  border: 2px solid var(--accent);
   padding: 10px 24px;
   border-radius: 8px;
   font-weight: 600;
@@ -231,7 +233,7 @@ footer .legal-links a:hover {
 }
 #cookie-banner button:hover,
 #cookie-banner .cookie-config:hover {
-  background: #c9a24a;
+  background: var(--accent);
 }
 
 /* ================= CONTACT ================= */
@@ -242,7 +244,7 @@ footer .legal-links a:hover {
 }
 
 #contact a {
-  color: #c9a24a;
+  color: var(--accent);
   text-decoration: none;
   font-weight: 500;
 }
@@ -305,8 +307,8 @@ footer .legal-links a:hover {
 
 /* ================= COOKIE NECESARIAS ================= */
 .cookie-option input[type="checkbox"][disabled] {
-  background-color: #B5B5B5;  /* fondo gris */
-  border: 2px solid #B5B5B5;  /* contorno gris */
+  background-color: var(--gray);  /* fondo gris */
+  border: 2px solid var(--gray);  /* contorno gris */
   cursor: not-allowed;
 }
 
@@ -317,8 +319,8 @@ footer .legal-links a:hover {
   left: 50%;
   width: 9px;
   height: 5px;
-  border-left: 2.2px solid #000000; /* check negro */
-  border-bottom: 2.2px solid #000000;
+  border-left: 2.2px solid var(--black); /* check negro */
+  border-bottom: 2.2px solid var(--black);
   transform: translate(-50%, -50%) rotate(-45deg);
   box-sizing: border-box;
   pointer-events: none; /* asegura que no se pueda interactuar */
@@ -326,12 +328,12 @@ footer .legal-links a:hover {
 
 /* ================= COOKIE OPCIONALES (Análisis y Marketing) ================= */
 .cookie-option input[type="checkbox"]:not([disabled]) {
-  border: 2px solid #c9a24a; /* contorno dorado */
+  border: 2px solid var(--accent); /* contorno dorado */
   background-color: transparent;
 }
 
 .cookie-option input[type="checkbox"]:not([disabled]):checked {
-  background-color: #c9a24a; /* fondo dorado al marcar */
+  background-color: var(--accent); /* fondo dorado al marcar */
 }
 
 .cookie-option input[type="checkbox"]:not([disabled]):checked::after {
@@ -341,13 +343,13 @@ footer .legal-links a:hover {
   left: 50%;
   width: 9px;
   height: 5px;
-  border-left: 2.2px solid #FFFFFF; /* check blanco */
+  border-left: 2.2px solid var(--text); /* check blanco */
 }
 
   /* ================= SECURE CONTACT (EZEE) ================= */
 #secure-contact {
   background: var(--bg);
-  border: 2px solid #c9a24a;
+  border: 2px solid vat(--accent);
   border-radius: 12px;
   padding: 2rem;
 }
@@ -367,15 +369,15 @@ footer .legal-links a:hover {
 
 .secure-contact-form label {
   font-weight: 600;
-  color: #FFFFFF;
+  color: var(--text);
 }
 
 .secure-contact-form input,
 .secure-contact-form textarea {
   width: 100%;
   background: var(--bg);
-  color: #FFFFFF;
-  border: 1px solid #c9a24a;
+  color: var(--text);
+  border: 1px solid var(--accent);
   border-radius: 8px;
   padding: 0.75rem;
   font: inherit;
@@ -389,12 +391,12 @@ footer .legal-links a:hover {
   max-width: 760px;
   margin: 1rem auto 0 auto;
   text-align: center;
-  color: #c9a24a;
+  color: var(--accent);
   min-height: 1.2rem;
 }
 
-{
-  border-bottom: 2.2px solid #FFFFFF;
+.modifications-html {
+  border-bottom: 2.2px solid var(--text);
   transform: translate(-50%, -50%) rotate(-45deg);
   box-sizing: border-box;
 }
