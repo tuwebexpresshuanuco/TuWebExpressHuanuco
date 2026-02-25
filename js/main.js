@@ -360,3 +360,24 @@ document.addEventListener("visibilitychange", () => {
     if (c) c.value = "";
   }
 });
+
+
+/* =========================================================
+   🧠 CONEXIÓN DEL FORMULARIO EZEE
+   ========================================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const form = document.getElementById("secure-contact-form");
+
+  if (form) {
+    form.addEventListener("submit", async (e) => {
+
+      e.preventDefault(); // 💥 DETIENE LA REDIRECCIÓN
+
+      await EZEE_enviar();
+
+    });
+  }
+
+});
