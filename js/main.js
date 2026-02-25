@@ -343,19 +343,23 @@ document.addEventListener("keydown", e => {
 
 document.addEventListener("copy", e => {
   const activo = document.activeElement;
- if (activo?.id === "secure-message" || activo?.id === "secure-passphrase")
+
+  if (
+    activo?.id === "secure-message" ||
+    activo?.id === "secure-passphrase"
+  ) {
     e.preventDefault();
     alert("🔐 Copia deshabilitada en modo seguro");
   }
-});
 
+});
 
 /* Borrar datos si se cambia de pestaña */
 
 document.addEventListener("visibilitychange", () => {
   if (document.hidden) {
-    const m = document.getElementById("mensaje");
-    const c = document.getElementById("clave");
+   const m = document.getElementById("secure-message");
+const c = document.getElementById("secure-passphrase");
     if (m) m.value = "";
     if (c) c.value = "";
   }
