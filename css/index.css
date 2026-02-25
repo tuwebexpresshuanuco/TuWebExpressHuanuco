@@ -343,7 +343,9 @@ footer .legal-links a:hover {
   left: 50%;
   width: 9px;
   height: 5px;
-  border-left: 2.2px solid var(--text); /* check blanco */
+  border-left: 2.2px solid var(--text);
+  border-bottom: 2.2px solid var(--text);
+  transform: translate(-50%, -50%) rotate(-45deg);
 }
 
   /* ================= SECURE CONTACT (EZEE) ================= */
