@@ -96,68 +96,68 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  /* ================================
-     COOKIES.HTML LOGIC
-  ================================ */
+  /* =========================================================
+     COOKIES.HTML LOGIC (VERSIÓN SUPREMA Y SIN ERRORES)
+     ========================================================= */
 
   const analyticsCheckbox = document.getElementById("cookie-analytics");
   const marketingCheckbox = document.getElementById("cookie-marketing");
 
   if (analyticsCheckbox && marketingCheckbox) {
-    analyticsCheckbox.checked =
-      getCookie("twe_cookie_analytics") === "true";
-    marketingCheckbox.checked =
-      getCookie("twe_cookie_marketing") === "true";
+    // Leemos el estado actual
+    analyticsCheckbox.checked = getCookie("twe_cookie_analytics") === "true";
+    marketingCheckbox.checked = getCookie("twe_cookie_marketing") === "true";
 
     const acceptAllBtn = document.getElementById("cookie-accept-all");
     const rejectAllBtn = document.getElementById("cookie-reject-all");
     const saveBtn = document.getElementById("cookie-save");
 
+    /* --- OPCIÓN A: Aceptar Todo --- */
     if (acceptAllBtn) {
       acceptAllBtn.addEventListener("click", () => {
         analyticsCheckbox.checked = true;
         marketingCheckbox.checked = true;
 
-        setCookie("twe_cookie_consent", "accepted", 180);
-        setCookie("twe_cookie_analytics", "true", 180);
-        setCookie("twe_cookie_marketing", "true", 180);
+        setCookie("twe_cookie_consent", "accepted", 365);
+        setCookie("twe_cookie_analytics", "true", 365);
+        setCookie("twe_cookie_marketing", "true", 365);
 
-        alert("Todas las cookies han sido aceptadas.");
+        alert("Todas las cookies han sido aceptadas por 1 año.");
       });
     }
 
+    /* --- OPCIÓN B: Rechazar Todo (La más segura) --- */
     if (rejectAllBtn) {
       rejectAllBtn.addEventListener("click", () => {
         analyticsCheckbox.checked = false;
         marketingCheckbox.checked = false;
 
-        setCookie("twe_cookie_consent", "rejected", 180);
-        setCookie("twe_cookie_analytics", "false", 180);
-        setCookie("twe_cookie_marketing", "false", 180);
+        setCookie("twe_cookie_consent", "rejected", 365);
+        setCookie("twe_cookie_analytics", "false", 365);
+        setCookie("twe_cookie_marketing", "false", 365);
+        
+        // Opcional: Si quieres borrar cookies de terceros podrías añadirlas aquí:
+        // deleteCookie("_ga"); 
 
         alert("Todas las cookies han sido rechazadas.");
       });
     }
 
+    /* --- OPCIÓN C: Guardar Personalización --- */
     if (saveBtn) {
       saveBtn.addEventListener("click", () => {
-        setCookie("twe_cookie_consent", "custom", 180);
-        setCookie(
-          "twe_cookie_analytics",
-          analyticsCheckbox.checked,
-          180
-        );
-        setCookie(
-          "twe_cookie_marketing",
-          marketingCheckbox.checked,
-          180
-        );
+        setCookie("twe_cookie_consent", "custom", 365);
+        
+        // CRÍTICO: Convertimos el booleano del checkbox a String "true" o "false"
+        // Esto evita que getCookie() falle al comparar tipos distintos.
+        setCookie("twe_cookie_analytics", String(analyticsCheckbox.checked), 365);
+        setCookie("twe_cookie_marketing", String(marketingCheckbox.checked), 365);
 
         alert("Preferencias de cookies guardadas correctamente.");
       });
     }
-  }
-});
+       }
+   
 "use strict";
 
 /* =========================================================
