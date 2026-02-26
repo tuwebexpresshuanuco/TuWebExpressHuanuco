@@ -74,18 +74,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (acceptBtn) {
       acceptBtn.addEventListener("click", () => {
-        setCookie("twe_cookie_consent", "accepted", 180);
-        setCookie("twe_cookie_analytics", "true", 180);
-        setCookie("twe_cookie_marketing", "true", 180);
+        setCookie("twe_cookie_consent", "accepted", 365);
+        setCookie("twe_cookie_analytics", "true", 365);
+        setCookie("twe_cookie_marketing", "true", 365);
         banner.style.display = "none";
       });
     }
 
     if (rejectBtn) {
       rejectBtn.addEventListener("click", () => {
-        setCookie("twe_cookie_consent", "rejected", 180);
-        setCookie("twe_cookie_analytics", "false", 180);
-        setCookie("twe_cookie_marketing", "false", 180);
+        setCookie("twe_cookie_consent", "rejected", 365);
+        setCookie("twe_cookie_analytics", "false", 365);
+        setCookie("twe_cookie_marketing", "false", 365);
         banner.style.display = "none";
       });
     }
