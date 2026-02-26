@@ -227,14 +227,23 @@ const EZEE = (() => {
     const keyMaterial = await crypto.subtle.importKey(
       "raw", enc.encode(password), "PBKDF2", false, ["deriveKey"]
     );
-    return crypto.subtle.deriveKey(
-      { name: "PBKDF2", salt, iterations: 210000, hash: "SHA-256" },
-      keyMaterial,
-      { name: "AES-GCM", length: 256 },
-      false,
-      ["encrypt", "decrypt"]
-    );
-  }
+   // Configuración central reutilizable
+const SECURITY_CONFIG = {
+  iterations: isMobile ? 90000 : 180000
+};
+
+return crypto.subtle.deriveKey(
+  {
+    name: "PBKDF2",
+    salt,
+    iterations: SECURITY_CONFIG.iterations,
+    hash: "SHA-256"
+  },
+  keyMaterial,
+  { name: "AES-GCM", length: 256 },
+  false,
+  ["encrypt", "decrypt"]
+);
 
   return {
     async encrypt(plainText, password) {
