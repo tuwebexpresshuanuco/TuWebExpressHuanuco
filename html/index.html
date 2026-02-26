@@ -122,21 +122,52 @@
   <h2 id="secure-contact-title">Mensaje Cifrado EZEE</h2>
   <p class="secure-contact-intro">Envía tu consulta con cifrado del lado del cliente. El contenido se prepara cifrado antes de abrir el correo a <strong>tuwebexpress.hco@gmail.com</strong>.</p>
 
-  <form id="secure-contact-form" class="secure-contact-form">
-    <label for="secure-name">Nombre</label>
-    <input id="secure-name" name="name" type="text" required maxlength="80" />
+  <form id="secure-contact-form" class="secure-contact-form" autocomplete="off">
 
-    <label for="secure-email">Correo o WhatsApp</label>
-    <input id="secure-email" name="email" type="text" required maxlength="120" />
+  <label for="secure-name">Nombre</label>
+  <input
+    id="secure-name"
+    name="name"
+    type="text"
+    required
+    maxlength="80"
+    autocomplete="name"
+  />
 
-    <label for="secure-message">Mensaje</label>
-    <textarea id="secure-message" name="message" rows="5" required maxlength="1500"></textarea>
+  <label for="secure-email">Correo o WhatsApp</label>
+  <input
+    id="secure-email"
+    name="email"
+    type="text"
+    required
+    maxlength="120"
+    autocomplete="email"
+  />
 
-    <label for="secure-passphrase">Clave de cifrado compartida</label>
-    <input id="secure-passphrase" name="passphrase" type="password" required minlength="8" maxlength="120" />
+  <label for="secure-message">Mensaje</label>
+  <textarea
+    id="secure-message"
+    name="message"
+    rows="5"
+    required
+    maxlength="1500"
+    autocomplete="off"
+  ></textarea>
 
-    <button type="submit" class="btn-primary">Cifrar y enviar</button>
-  </form>
+  <label for="secure-passphrase">Clave de cifrado compartida</label>
+  <input
+    id="secure-passphrase"
+    name="passphrase"
+    type="password"
+    required
+    minlength="8"
+    maxlength="120"
+    autocomplete="new-password"
+  />
+
+  <button type="submit" class="btn-primary">Cifrar y enviar</button>
+
+</form>
 
   <p id="secure-contact-status" class="secure-contact-status" aria-live="polite"></p>
 </section>
