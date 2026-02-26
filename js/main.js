@@ -47,24 +47,27 @@ document.addEventListener("DOMContentLoaded", () => {
   const message = document.querySelector("#cookie-banner .cookie-text");
   const actions = document.querySelector("#cookie-banner .cookie-actions");
 
-  const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile/i.test(
+  // Detección de móvil mejorada
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
     navigator.userAgent
   );
 
   if (banner) {
     const consent = getCookie("twe_cookie_consent");
 
+    // Si NO hay consentimiento, mostramos el banner
     if (!consent) {
       banner.style.display = "block";
+    } else {
+      banner.style.display = "none";
     }
 
-    /* ===== Texto dinámico ===== */
+    /* ===== Texto dinámico corregido ===== */
     if (message) {
       if (isMobile) {
-        message.textContent = "Usamos cookies para mejorar tu experiencia.";
+        message.innerText = "Usamos cookies para mejorar tu experiencia.";
       } else {
-        message.textContent =
-          "Usamos cookies para mejorar tu experiencia, puedes aceptar, rechazar o configurar según sus preferencias de cookies en cualquier momento.";
+        message.innerText = "Usamos cookies para mejorar tu experiencia, puedes aceptar, rechazar o configurar según sus preferencias de cookies en cualquier momento.";
       }
     }
 
@@ -78,23 +81,76 @@ document.addEventListener("DOMContentLoaded", () => {
     const rejectBtn = document.getElementById("cookie-reject");
 
     if (acceptBtn) {
-      acceptBtn.addEventListener("click", () => {
+      acceptBtn.onclick = () => {
         setCookie("twe_cookie_consent", "accepted", 365);
         setCookie("twe_cookie_analytics", "true", 365);
         setCookie("twe_cookie_marketing", "true", 365);
         banner.style.display = "none";
-      });
+      };
     }
 
     if (rejectBtn) {
-      rejectBtn.addEventListener("click", () => {
+      rejectBtn.onclick = () => {
         setCookie("twe_cookie_consent", "rejected", 365);
         setCookie("twe_cookie_analytics", "false", 365);
         setCookie("twe_cookie_marketing", "false", 365);
         banner.style.display = "none";
-      });
+      };
     }
   }
+
+  /* ================================
+     COOKIES.HTML LOGIC
+  ================================ */
+
+  const analyticsCheckbox = document.getElementById("cookie-analytics");
+  const marketingCheckbox = document.getElementById("cookie-marketing");
+
+  // Solo ejecutamos esto si estamos en la página que tiene los checkboxes
+  if (analyticsCheckbox && marketingCheckbox) {
+    
+    // Sincronizar estado inicial
+    analyticsCheckbox.checked = getCookie("twe_cookie_analytics") === "true";
+    marketingCheckbox.checked = getCookie("twe_cookie_marketing") === "true";
+
+    const acceptAllBtn = document.getElementById("cookie-accept-all");
+    const rejectAllBtn = document.getElementById("cookie-reject-all");
+    const saveBtn = document.getElementById("cookie-save");
+
+    if (acceptAllBtn) {
+      acceptAllBtn.onclick = () => {
+        analyticsCheckbox.checked = true;
+        marketingCheckbox.checked = true;
+        setCookie("twe_cookie_consent", "accepted", 365);
+        setCookie("twe_cookie_analytics", "true", 365);
+        setCookie("twe_cookie_marketing", "true", 365);
+        alert("Todas las cookies han sido aceptadas.");
+      };
+    }
+
+    if (rejectAllBtn) {
+      rejectAllBtn.onclick = () => {
+        analyticsCheckbox.checked = false;
+        marketingCheckbox.checked = false;
+        setCookie("twe_cookie_consent", "rejected", 365);
+        setCookie("twe_cookie_analytics", "false", 365);
+        setCookie("twe_cookie_marketing", "false", 365);
+        alert("Todas las cookies han sido rechazadas.");
+      };
+    }
+
+    if (saveBtn) {
+      saveBtn.onclick = () => {
+        setCookie("twe_cookie_consent", "custom", 365);
+        setCookie("twe_cookie_analytics", String(analyticsCheckbox.checked), 365);
+        setCookie("twe_cookie_marketing", String(marketingCheckbox.checked), 365);
+        alert("Preferencias guardadas correctamente.");
+      };
+    }
+  }
+});
+     
+
 
   /* =========================================================
      COOKIES.HTML LOGIC (VERSIÓN SUPREMA Y SIN ERRORES)
