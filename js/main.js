@@ -6,14 +6,16 @@ function setCookie(name, value, days) {
   let expires = "";
   if (days) {
     const date = new Date();
-    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+    // Cálculo preciso de milisegundos para 365 días
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
     expires = "; expires=" + date.toUTCString();
   }
-  document.cookie =
-    name +
-    "=" +
-    encodeURIComponent(value) +
-    expires +
+  // Forzamos path=/ para que la cookie sea global en todo tu dominio
+  document.cookie = 
+    name + 
+    "=" + 
+    encodeURIComponent(value) + 
+    expires + 
     "; path=/; SameSite=Lax";
 }
 
@@ -22,6 +24,7 @@ function getCookie(name) {
   const ca = document.cookie.split(";");
   for (let i = 0; i < ca.length; i++) {
     let c = ca[i].trim();
+    // Verificamos que la cookie empiece exactamente con el nombre buscado
     if (c.indexOf(nameEQ) === 0) {
       return decodeURIComponent(c.substring(nameEQ.length));
     }
@@ -30,8 +33,10 @@ function getCookie(name) {
 }
 
 function deleteCookie(name) {
-  document.cookie = name + "=; Max-Age=0; path=/";
+  // Al borrar, también debemos especificar el path=/ para asegurar la eliminación
+  document.cookie = name + "=; Max-Age=0; path=/; SameSite=Lax";
 }
+
 
 /* ================================
    COOKIE BANNER (INDEX)
