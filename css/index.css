@@ -258,10 +258,11 @@ footer .legal-links a:hover {
     justify-content: space-between;
   }
 
-  #cookie-banner .cookie-text {
-    max-width: 60%;
-    margin-bottom: 0;
-  }
+#cookie-banner .cookie-text {
+  max-width: 60%;
+  margin-bottom: 20px; /* ← AQUÍ el espacio para que no esté pegado */
+  line-height: 1.5;
+}
 
   #cookie-banner .cookie-actions {
     display: grid;
