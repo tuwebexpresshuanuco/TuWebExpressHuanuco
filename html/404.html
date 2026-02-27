@@ -6,54 +6,76 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Favicon -->
- <link rel="icon" href="/assets/images/favicon/favicon.ico">
-<link rel="icon" type="image/png" sizes="192x192" href="/assets/images/favicon/favicon-192x192.png">
-<link rel="icon" type="image/png" sizes="512x512" href="/assets/images/favicon/favicon-512x512.png">
+  <link rel="icon" href="/assets/images/favicon/favicon.ico">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/images/favicon/favicon-192x192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/images/favicon/favicon-512x512.png">
 
   <style>
+    :root {
+      --bg: #0f1724;
+      --text: #ffffff;
+      --accent: #c9a24a;
+    }
+
     body {
       margin: 0;
       font-family: system-ui, sans-serif;
-      background: #0f1724;
-      color: #ffffff;
-      display: grid;
-      place-items: center;
-      height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+
+      /* CENTRADO PERFECTO */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
       text-align: center;
     }
 
+    .container {
+      padding: 40px 20px;
+    }
+
     h1 {
-      font-size: 72px;
+      font-size: 90px;
       margin: 0;
-      color: #c9a24a;
+      color: var(--accent);
+      line-height: 1;
     }
 
     p {
-      opacity: 0.8;
+      opacity: 0.85;
+      margin-top: 12px;
+      font-size: 1.1rem;
     }
 
-    a {
+    /* BOTÓN ESTILO INDEX */
+    .btn {
       display: inline-block;
-      margin-top: 20px;
-      padding: 12px 20px;
-      background: #c9a24a;
-      color: #ffffff;
+      margin-top: 32px;
+      padding: 14px 28px;
+      background: var(--bg);
+      color: var(--text);
+      border: 2px solid var(--accent);
+      border-radius: 8px;
+      font-weight: 700;
       text-decoration: none;
-      border-radius: 6px;
-      font-weight: 600;
+      transition: all .25s ease;
     }
 
-    a:hover {
-      background: #c9a24a;
+    .btn:hover {
+      background: var(--accent);
+      color: var(--text);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(201,162,74,0.25);
     }
   </style>
 </head>
 
 <body>
-  <div>
+  <div class="container">
     <h1>404</h1>
-    <p>La página que buscas no existe.</p>
-    <a href="/">Volver al inicio</a>
+    <p>La página que buscas no existe o fue movida.</p>
+    <a href="/" class="btn">Volver al inicio</a>
   </div>
 </body>
 </html>
