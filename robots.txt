@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://tuwebexpresshuanucoenterbusiness2026.netlify.app/sitemap.xml
+Sitemap: https://tuwebexpresshuanuco2026businessenter.netlify.app//sitemap.xml
