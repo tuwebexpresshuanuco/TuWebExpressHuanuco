@@ -91,8 +91,8 @@ El sitio incorpora un **sistema propio de consentimiento de cookies**, alineado 
 - **WhatsApp / Teléfono:** +51 981 601 075  
 - **Facebook:** https://www.facebook.com/TuWebExpressHuanuco  
 - **Instagram:** https://www.instagram.com/TuWebExpressHuanuco  
-- **Sitio web:** https://tuwebexpresshuanucoenterbusiness2026.netlify.app/
-
+- **Sitio web:** 
+https://tuwebexpresshuanuco2026businessenter.netlify.app/
 ---
 
 ## 📄 Licencia
